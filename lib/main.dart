@@ -9,6 +9,7 @@ import 'package:flutter_auth_page/pages/welcome.dart';
 import 'package:get/get.dart';
 
 import 'dino/dino_game_main.dart';
+// import 'dino_lower/new_main.dart';
 import 'firebase_options.dart';
 import 'quizPose/models/Questions.dart';
 
@@ -16,7 +17,10 @@ List<CameraDescription> cameras = [];
 final Changer changer = Changer();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await dinoHead.initHive();
+
   await initHive();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
