@@ -146,35 +146,35 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
   /// This method reads [PlayerData] from the hive box.
   Future<PlayerData> _readPlayerData() async {
     final playerDataBox =
-        await Hive.openBox<PlayerData>('DinoRun.PlayerDataBox');
-    final playerData = playerDataBox.get('DinoRun.PlayerData');
+        await Hive.openBox<PlayerData>('DinoRunFace.PlayerDataBox');
+    final playerData = playerDataBox.get('DinoRunFace.PlayerData');
 
     // If data is null, this is probably a fresh launch of the game.
     if (playerData == null) {
       // In such cases store default values in hive.
-      await playerDataBox.put('DinoRun.PlayerData', PlayerData());
+      await playerDataBox.put('DinoRunFace.PlayerData', PlayerData());
     }
 
     // Now it is safe to return the stored value.
-    return playerDataBox.get('DinoRun.PlayerData')!;
+    return playerDataBox.get('DinoRunFace.PlayerData')!;
   }
 
   /// This method reads [Settings] from the hive box.
   Future<Settings> _readSettings() async {
-    final settingsBox = await Hive.openBox<Settings>('DinoRun.SettingsBox');
-    final settings = settingsBox.get('DinoRun.Settings');
+    final settingsBox = await Hive.openBox<Settings>('DinoRunFace.SettingsBox');
+    final settings = settingsBox.get('DinoRunFace.Settings');
 
     // If data is null, this is probably a fresh launch of the game.
     if (settings == null) {
       // In such cases store default values in hive.
       await settingsBox.put(
-        'DinoRun.Settings',
+        'DinoRunFace.Settings',
         Settings(bgm: true, sfx: true),
       );
     }
 
     // Now it is safe to return the stored value.
-    return settingsBox.get('DinoRun.Settings')!;
+    return settingsBox.get('DinoRunFace.Settings')!;
   }
 
   @override

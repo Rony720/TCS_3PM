@@ -8,8 +8,8 @@ import 'package:flutter_auth_page/pages/signup.dart';
 import 'package:flutter_auth_page/pages/welcome.dart';
 import 'package:get/get.dart';
 
-import 'dino/dino_game_main.dart';
-// import 'dino_lower/new_main.dart';
+import 'dino/dino_game_main.dart' as dinoHead;
+import 'dino_lower/new_main.dart' as dinoLower;
 import 'firebase_options.dart';
 import 'quizPose/models/Questions.dart';
 
@@ -18,9 +18,8 @@ final Changer changer = Changer();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await dinoHead.initHive();
-
-  await initHive();
-
+  await dinoHead.initHive();
+  await dinoLower.initHive();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
