@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../dino/dino_game_main.dart';
 import '../dino_lower/new_main.dart';
+import '../flappy_lower/flappy_lower_main.dart';
 import '../flappymainfolder/flappyface/game/flappy_main.dart';
 import '../fruitcollection/game/fruitcollection_main.dart';
 import '../quizPose/screen_quiz/welcome/welcome_screen.dart';
@@ -51,7 +52,7 @@ class _GamesLowerState extends State<GamesLower> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => FlappyFaceDetect(),
+                              builder: (context) => FlappyPoseDetection(),
                             ),
                           );
                         },
