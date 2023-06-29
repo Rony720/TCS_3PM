@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_auth_page/src/widgets/placeholder.dart';
 import 'package:flutter_auth_page/pages/drawer.dart';
@@ -31,19 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
       container = progressPage();
     } else if (currentPage == DrawerSections.pickgame) {
       container = Games();
-    } 
-    else if (currentPage == DrawerSections.pickgame_upper) {
+    } else if (currentPage == DrawerSections.pickgame_upper) {
       container = GamesUpper();
     } else if (currentPage == DrawerSections.pickgame_lower) {
       container = GamesLower();
-    } 
-    else if (currentPage == DrawerSections.login) {
+    } else if (currentPage == DrawerSections.login) {
       container = Login();
     }
-  
-    
-    
-     /*else if (currentPage == DrawerSections.settings) {
+
+    /*else if (currentPage == DrawerSections.settings) {
       container = SettingsPage();
     }*/
     return Scaffold(
@@ -102,6 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text("Logout"),
                 style: ElevatedButton.styleFrom(),
                 onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  print("Signed Out Success");
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Login()));
                 },
@@ -124,18 +123,12 @@ class _HomeScreenState extends State<HomeScreen> {
               currentPage = DrawerSections.leaderboard;
             } else if (id == 3) {
               currentPage = DrawerSections.pickgame;
-            } 
-            else if (id == 4) {
+            } else if (id == 4) {
               currentPage = DrawerSections.pickgame_upper;
-            } 
-            
-            else if (id == 5) {
+            } else if (id == 5) {
               currentPage = DrawerSections.pickgame_lower;
-            } 
-            
-            
-            
-            
+            }
+
             /*else if (id == 4) {
               currentPage = DrawerSections.settings;
             }*/

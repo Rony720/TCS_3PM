@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'dino/dino_game_main.dart' as dinoHead;
 import 'dino_lower/new_main.dart' as dinoLower;
 import 'firebase_options.dart';
+import 'main_page.dart';
 import 'quizPose/models/Questions.dart';
 
 List<CameraDescription> cameras = [];
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         // '/drawer': (context) => const
-        '/': (context) => const Welcome(),
+        '/': (context) => const MainPage(),
         '/login': (context) => const Login(),
         '/signup': (context) => const Signup(),
       },
