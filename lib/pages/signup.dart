@@ -1,14 +1,11 @@
 import 'dart:math';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_page/pages/dashboard.dart';
-import 'package:flutter_auth_page/widgets/divider.dart';
-import 'package:flutter_auth_page/widgets/socials.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_auth_page/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../API/base_client.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -22,8 +19,9 @@ class _SignupState extends State<Signup> {
   final passwordController = TextEditingController();
   final cPasswordController = TextEditingController();
   final usernameController = TextEditingController();
-  final ageController = TextEditingController();
+  final dobController = TextEditingController();
   final medController = TextEditingController();
+  final phoneController = TextEditingController();
   bool _obscureText = true;
   bool _obscureTextt = true;
 
@@ -33,8 +31,9 @@ class _SignupState extends State<Signup> {
     passwordController.dispose();
     cPasswordController.dispose();
     usernameController.dispose();
-    ageController.dispose();
+    dobController.dispose();
     medController.dispose();
+    phoneController.dispose();
     super.dispose();
   }
 
@@ -91,7 +90,7 @@ class _SignupState extends State<Signup> {
                       width: 240,
                       height: 100,
                     ),
-                    const SizedBox(height:16),
+                    const SizedBox(height: 16),
                     Container(
                       width: 300,
                       padding: const EdgeInsets.symmetric(
@@ -141,7 +140,7 @@ class _SignupState extends State<Signup> {
                         obscureText: false,
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.done,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "Name :",
                           hintStyle: TextStyle(
                             fontFamily: 'SourceSansPro',
@@ -181,18 +180,18 @@ class _SignupState extends State<Signup> {
                         textInputAction: TextInputAction.done,
                         decoration: InputDecoration(
                           hintText: "Password :",
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                             fontFamily: 'SourceSansPro',
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                           ),
                           // labelText: "Email :",
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                             fontSize: 20,
                           ),
                           // border: OutlineInputBorder(),
                           border: InputBorder.none,
-                          prefixIcon: Icon(
+                          prefixIcon: const Icon(
                             Icons.lock,
                             color: kPrimaryColor,
                             size: 18,
@@ -229,18 +228,18 @@ class _SignupState extends State<Signup> {
                         textInputAction: TextInputAction.done,
                         decoration: InputDecoration(
                           hintText: "Confirm Password :",
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                             fontFamily: 'SourceSansPro',
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                           ),
                           // labelText: "Email :",
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                             fontSize: 20,
                           ),
                           // border: OutlineInputBorder(),
                           border: InputBorder.none,
-                          prefixIcon: Icon(
+                          prefixIcon: const Icon(
                             Icons.lock,
                             color: kPrimaryColor,
                             size: 18,
@@ -269,11 +268,11 @@ class _SignupState extends State<Signup> {
                         color: kPrimaryLightColor,
                       ),
                       child: TextField(
-                        controller: ageController,
+                        controller: dobController,
                         obscureText: false,
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.done,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "DOB :",
                           hintStyle: TextStyle(
                             fontFamily: 'SourceSansPro',
@@ -377,7 +376,7 @@ class _SignupState extends State<Signup> {
                         color: kPrimaryLightColor,
                       ),
                       child: TextField(
-                        controller: medController,
+                        controller: phoneController,
                         obscureText: false,
                         keyboardType: TextInputType.phone,
                         textInputAction: TextInputAction.done,
@@ -403,13 +402,15 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
 
-
                     const SizedBox(height: 16),
                     SizedBox(
                       width: 300,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: createAccount,
+                        onPressed: () {
+                          createAccount();
+                          // Navigator.pop(context);
+                        },
                         style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(kPrimaryColor),
@@ -501,36 +502,6 @@ class _SignupState extends State<Signup> {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
 
-        Future addUserDetails(String name, int age, String med, String email) async {
-          final FirebaseAuth auth = FirebaseAuth.instance;
-
-          final User? user = auth.currentUser;
-          final uid = user!.uid;
-
-          await FirebaseFirestore.instance.collection('users').doc(uid).set({
-            'username': name,
-            'age': age,
-            'medical condition': med,
-            
-            'email':email,
-            'uid': uid
-            // 'docref':''
-          }); /*.then((DocumentReference doc) {
-              var userDoc = FirebaseFirestore.instance.collection('users').doc(doc.id);
-              userDoc.update({'docref':doc.id});
-                
-          });*/
-        }
-
-        addUserDetails(
-          usernameController.text.trim(),
-          int.parse(ageController.text.trim()),
-          medController.text.trim(),
-          email
-        );
-
-        print("User created");
-
         if (userCredential.user != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -544,6 +515,14 @@ class _SignupState extends State<Signup> {
               backgroundColor: Colors.green,
             ),
           );
+          // add user details
+
+          addUserDetails(
+              usernameController.text.trim(),
+              int.parse(dobController.text.trim()),
+              medController.text.trim(),
+              emailController.text.trim(),
+              int.parse(phoneController.text.trim()));
           Navigator.pop(context);
         }
       } on FirebaseAuthException catch (e) {
@@ -572,7 +551,35 @@ class _SignupState extends State<Signup> {
             backgroundColor: Colors.red,
           ),
         );
+      } on FirebaseException catch (e) {
+        print("FIREBASE EXCEPTION");
+        print("FIREBASE EXCEPTION");
+        print("FIREBASE EXCEPTION");
       }
+    }
+  }
+
+  Future addUserDetails(
+      String name, int dob, String med, String email, int phone) async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    var body = {
+      "fields": {
+        "medical": {"stringValue": med},
+        "phone": {"integerValue": phone},
+        "uid": {"stringValue": uid},
+        "dob": {"integerValue": dob},
+        "email": {"stringValue": email},
+        "username": {"stringValue": name}
+      }
+    };
+    var response = await MyBaseClient().post('', body);
+
+    if (response != null) {
+      debugPrint("POST SUCCESS");
+    } else {
+      debugPrint("POST FAILED");
     }
   }
 }

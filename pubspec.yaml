@@ -50,6 +50,7 @@ dependencies:
   camera: ^0.10.4
   image_picker: ^0.8.7+3
   get: ^4.1.4
+  http: ^0.13.6
 
 dev_dependencies:
   hive_generator: 2.0.0

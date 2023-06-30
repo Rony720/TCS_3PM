@@ -1,8 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../API/base_client.dart';
+import '../API/users.dart';
 //import 'package:expansion_tile_card/expansion_tile_card.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -12,29 +14,37 @@ class DashboardPage extends StatelessWidget {
 
   //final GlobalKey<ExpansiSonTileCardState> cardA = new GlobalKey();
   //final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
-  String username = 'a', med = 'a', agee = 'a', email = 'a';
+  String username = 'null', med = 'null', agee = 'null', email = 'null';
   int age = 0;
+  String phone = "null";
 
-  _fetch() async {
-    final firebaseUser = await FirebaseAuth.instance.currentUser;
+  Future fetch() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
 
-    if (firebaseUser != null) {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc((firebaseUser.uid))
-          .get()
-          .then((ds) {
-        username = ds.data()!['username'] ?? [];
-        // print(username);
-        age = ds.data()!['age'] ?? [];
-        med = ds.data()!['medical condition'] ?? [];
-        email = ds.data()!['email'] ?? [];
-        agee = age.toString();
-        //print(username);
-      }).catchError((e) {
-        print(e);
-      });
-      return (username);
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+
+    print("UID IS ${uid}");
+    print("UID IS ${uid}");
+    print("UID IS ${uid}");
+    print("UID IS ${uid}");
+
+    var response = await MyBaseClient().get('');
+    if (response != null) {
+      var users = documentFromJson(response);
+      for (int i = 0; i < users.documents!.length; i++) {
+        if (users.documents![i].fields!.uid!.stringValue == uid.toString()) {
+          username =
+              users.documents![i].fields!.username!.stringValue.toString();
+          age = int.parse(
+              users.documents![i].fields!.dob!.integerValue.toString());
+          med = users.documents![i].fields!.medical!.stringValue.toString();
+          email = users.documents![i].fields!.email!.stringValue.toString();
+          agee = age.toString();
+          phone = users.documents![i].fields!.phone!.integerValue.toString();
+          return username;
+        }
+      }
     }
   }
 
@@ -60,32 +70,29 @@ class DashboardPage extends StatelessWidget {
                             blurRadius: 20,
                             offset: Offset(5, 5))
                       ]),
-                  child: 
-                  /*const Icon(
+                  child:
+                      /*const Icon(
                     Icons.person,
                     size: 60,
                     color: Colors.blue,
                   ),*/
 
-  Container(
-            //margin: const EdgeInsets.only(bottom: 10),
-            height: 70,
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/gamer.png'),
-                )),
-          ),
-
+                      Container(
+                    //margin: const EdgeInsets.only(bottom: 10),
+                    height: 70,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/gamer.png'),
+                        )),
+                  ),
                 ),
-                
-              
                 const SizedBox(
                   height: 20,
                 ),
                 Center(
                     child: FutureBuilder(
-                  future: _fetch(),
+                  future: fetch(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.done)
                       return Text("Loading data...Please wait");
@@ -120,7 +127,7 @@ class DashboardPage extends StatelessWidget {
                                           leading: Icon(Icons.date_range),
                                           title: Text("Date of Birth"),
                                           subtitle: FutureBuilder(
-                                            future: _fetch(),
+                                            future: fetch(),
                                             builder: (context, snapshot) {
                                               if (snapshot.connectionState !=
                                                   ConnectionState.done)
@@ -136,7 +143,7 @@ class DashboardPage extends StatelessWidget {
                                             Icon(Icons.medical_information),
                                         title: Text("Medical Condition"),
                                         subtitle: FutureBuilder(
-                                          future: _fetch(),
+                                          future: fetch(),
                                           builder: (context, snapshot) {
                                             if (snapshot.connectionState !=
                                                 ConnectionState.done)
@@ -151,7 +158,7 @@ class DashboardPage extends StatelessWidget {
                                         leading: Icon(Icons.email),
                                         title: Text("Email"),
                                         subtitle: FutureBuilder(
-                                          future: _fetch(),
+                                          future: fetch(),
                                           builder: (context, snapshot) {
                                             if (snapshot.connectionState !=
                                                 ConnectionState.done)
@@ -161,10 +168,19 @@ class DashboardPage extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      const ListTile(
+                                      ListTile(
                                         leading: Icon(Icons.phone),
                                         title: Text("Phone"),
-                                        subtitle: Text("99--99876-56"),
+                                        subtitle: FutureBuilder(
+                                          future: fetch(),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.connectionState !=
+                                                ConnectionState.done)
+                                              return Text(
+                                                  "Loading data...Please wait");
+                                            return Text(phone);
+                                          },
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -197,7 +213,7 @@ class DashboardPage extends StatelessWidget {
   String username = 'a', med = 'a', agee = 'a', email = 'a';
   int age = 0;
 
-  _fetch() async {
+  fetch() async {
     final firebaseUser = await FirebaseAuth.instance.currentUser;
 
     if (firebaseUser != null) {
@@ -293,7 +309,7 @@ class DashboardPage extends StatelessWidget {
                 ),
                 Center(
                     child: FutureBuilder(
-                  future: _fetch(),
+                  future: fetch(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.done)
                       return Text("Loading data...Please wait");
@@ -329,7 +345,7 @@ class DashboardPage extends StatelessWidget {
                                           leading: Icon(Icons.date_range),
                                           title: Text("Date of Birth"),
                                           subtitle: FutureBuilder(
-                                            future: _fetch(),
+                                            future: fetch(),
                                             builder: (context, snapshot) {
                                               if (snapshot.connectionState !=
                                                   ConnectionState.done)
@@ -345,7 +361,7 @@ class DashboardPage extends StatelessWidget {
                                             Icon(Icons.medical_information),
                                         title: Text("Medical Condition"),
                                         subtitle: FutureBuilder(
-                                          future: _fetch(),
+                                          future: fetch(),
                                           builder: (context, snapshot) {
                                             if (snapshot.connectionState !=
                                                 ConnectionState.done)
@@ -360,7 +376,7 @@ class DashboardPage extends StatelessWidget {
                                         leading: Icon(Icons.email),
                                         title: Text("Email"),
                                         subtitle: FutureBuilder(
-                                          future: _fetch(),
+                                          future: fetch(),
                                           builder: (context, snapshot) {
                                             if (snapshot.connectionState !=
                                                 ConnectionState.done)

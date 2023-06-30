@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_page/API/base_client.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_auth_page/constants.dart';
 
+import '../API/users.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({super.key});
@@ -60,7 +62,6 @@ class _WelcomeState extends State<Welcome> {
                     const SizedBox(height: 150),
                     SizedBox(
                       width: 300,
-
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/login');
@@ -127,7 +128,7 @@ class _WelcomeState extends State<Welcome> {
           ),
         ),
       ),
-    );;
+    );
+    ;
   }
 }
-
