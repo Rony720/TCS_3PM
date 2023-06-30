@@ -19,6 +19,11 @@ class _LoginState extends State<Login> {
   bool _obscureText = true;
 
   Future signIn() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(child: CircularProgressIndicator());
+        });
     if (emailController.text == "" || passwordController.text == "") {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -39,6 +44,8 @@ class _LoginState extends State<Login> {
             .signInWithEmailAndPassword(
                 email: emailController.text.trim(),
                 password: passwordController.text.trim());
+        // remove circular progress
+        Navigator.of(context).pop();
         if (userCredential.user != null) {
           // ignore: use_build_context_synchronously
           FocusScope.of(context).unfocus();
@@ -54,17 +61,13 @@ class _LoginState extends State<Login> {
               backgroundColor: Colors.green,
             ),
           );
-          // ignore: use_build_context_synchronously
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomeScreen(),
-            ),
-          );
           emailController.text = "";
           passwordController.text = "";
+          Navigator.pop(context);
         }
       } on FirebaseAuthException catch (e) {
+        // remove circular progress
+        Navigator.of(context).pop();
         print(e.code);
 
         String errorMessage;
@@ -208,7 +211,7 @@ class _LoginState extends State<Login> {
                       autocorrect: false,
                       keyboardType: TextInputType.visiblePassword,
                       textInputAction: TextInputAction.done,
-                      decoration:  InputDecoration(
+                      decoration: InputDecoration(
                           hintText: "Password :",
                           hintStyle: TextStyle(
                             fontFamily: 'SourceSansPro',
@@ -226,14 +229,15 @@ class _LoginState extends State<Login> {
                             color: kPrimaryColor,
                             size: 18,
                           ),
-                          suffixIcon:  GestureDetector(
+                          suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
-                                 _obscureText = !_obscureText;
+                                _obscureText = !_obscureText;
                               });
-                             
                             },
-                            child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                            child: Icon(_obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off),
                           )),
                     ),
                   ),

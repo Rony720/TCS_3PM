@@ -15,7 +15,6 @@ class DashboardPage extends StatelessWidget {
   //final GlobalKey<ExpansiSonTileCardState> cardA = new GlobalKey();
   //final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
   String username = 'null', med = 'null', agee = 'null', email = 'null';
-  int age = 0;
   String phone = "null";
 
   Future fetch() async {
@@ -32,16 +31,27 @@ class DashboardPage extends StatelessWidget {
     var response = await MyBaseClient().get('');
     if (response != null) {
       var users = documentFromJson(response);
+      debugPrint(users.documents!.length.toString());
       for (int i = 0; i < users.documents!.length; i++) {
+        debugPrint("inside loop");
         if (users.documents![i].fields!.uid!.stringValue == uid.toString()) {
+          debugPrint("GOT IT");
           username =
               users.documents![i].fields!.username!.stringValue.toString();
-          age = int.parse(
-              users.documents![i].fields!.dob!.integerValue.toString());
+          debugPrint(username);
+          
           med = users.documents![i].fields!.medical!.stringValue.toString();
+          debugPrint(med);
           email = users.documents![i].fields!.email!.stringValue.toString();
-          agee = age.toString();
+          debugPrint(email);
+          agee = users.documents![i].fields!.dob!.stringValue!;
+          debugPrint(agee);
           phone = users.documents![i].fields!.phone!.integerValue.toString();
+          debugPrint(phone);
+          debugPrint(username);
+          debugPrint(med);
+          debugPrint(phone);
+          debugPrint(email);
           return username;
         }
       }
@@ -64,8 +74,8 @@ class DashboardPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(width: 5, color: Colors.white),
                       color: Colors.white,
-                      boxShadow: [
-                        const BoxShadow(
+                      boxShadow: const [
+                        BoxShadow(
                             color: Colors.black12,
                             blurRadius: 20,
                             offset: Offset(5, 5))

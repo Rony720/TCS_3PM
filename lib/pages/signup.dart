@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_auth_page/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 import '../API/base_client.dart';
 
@@ -19,7 +20,9 @@ class _SignupState extends State<Signup> {
   final passwordController = TextEditingController();
   final cPasswordController = TextEditingController();
   final usernameController = TextEditingController();
+
   final dobController = TextEditingController();
+  final DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
   final medController = TextEditingController();
   final phoneController = TextEditingController();
   bool _obscureText = true;
@@ -270,10 +273,10 @@ class _SignupState extends State<Signup> {
                       child: TextField(
                         controller: dobController,
                         obscureText: false,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.datetime,
                         textInputAction: TextInputAction.done,
                         decoration: const InputDecoration(
-                          hintText: "DOB :",
+                          hintText: "Date of Birth :",
                           hintStyle: TextStyle(
                             fontFamily: 'SourceSansPro',
                             fontSize: 18,
@@ -291,6 +294,8 @@ class _SignupState extends State<Signup> {
                             size: 18,
                           ),
                         ),
+                        onTap: () => _selectDate(context),
+                        readOnly: true,
                       ),
                     ),
 
@@ -308,7 +313,7 @@ class _SignupState extends State<Signup> {
                         obscureText: false,
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.done,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "Medical Condition :",
                           hintStyle: TextStyle(
                             fontFamily: 'SourceSansPro',
@@ -330,42 +335,6 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
 
-/*const SizedBox(height: 16),
-                    Container(
-                      width: 300,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(66),
-                        color: kPrimaryLightColor,
-                      ),
-                      child: TextField(
-                        controller: ageController,
-                        obscureText: false,
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.done,
-                        decoration: InputDecoration(
-                          hintText: "DOB :",
-                          hintStyle: TextStyle(
-                            fontFamily: 'SourceSansPro',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          // labelText: "Email :",
-                          labelStyle: TextStyle(
-                            fontSize: 20,
-                          ),
-                          // border: OutlineInputBorder(),
-                          border: InputBorder.none,
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: kPrimaryColor,
-                            size: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-*/
                     const SizedBox(height: 16),
                     Container(
                       width: 300,
@@ -380,7 +349,7 @@ class _SignupState extends State<Signup> {
                         obscureText: false,
                         keyboardType: TextInputType.phone,
                         textInputAction: TextInputAction.done,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "Phone Number :",
                           hintStyle: TextStyle(
                             fontFamily: 'SourceSansPro',
@@ -476,7 +445,30 @@ class _SignupState extends State<Signup> {
     );
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime currentDate = DateTime.now();
+    final DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: currentDate,
+      firstDate: DateTime(1900),
+      lastDate: currentDate,
+    );
+
+    if (selectedDate != null && selectedDate != currentDate) {
+      setState(() {
+        dobController.text = _dateFormat.format(selectedDate);
+      });
+    }
+  }
+
   void createAccount() async {
+    // loading circle
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(child: CircularProgressIndicator());
+        });
+
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String cPassword = cPasswordController.text.trim();
@@ -519,11 +511,10 @@ class _SignupState extends State<Signup> {
 
           addUserDetails(
               usernameController.text.trim(),
-              int.parse(dobController.text.trim()),
+              dobController.text.trim(),
               medController.text.trim(),
               emailController.text.trim(),
               int.parse(phoneController.text.trim()));
-          Navigator.pop(context);
         }
       } on FirebaseAuthException catch (e) {
         print(e.code.toString());
@@ -557,10 +548,13 @@ class _SignupState extends State<Signup> {
         print("FIREBASE EXCEPTION");
       }
     }
+    // remove circular progress
+    Navigator.of(context).pop();
+    Navigator.pop(context);
   }
 
   Future addUserDetails(
-      String name, int dob, String med, String email, int phone) async {
+      String name, String dob, String med, String email, int phone) async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     final uid = user!.uid;
@@ -569,7 +563,8 @@ class _SignupState extends State<Signup> {
         "medical": {"stringValue": med},
         "phone": {"integerValue": phone},
         "uid": {"stringValue": uid},
-        "dob": {"integerValue": dob},
+        "uid": {"stringValue": uid},
+        "dob": {"stringValue": dob},
         "email": {"stringValue": email},
         "username": {"stringValue": name}
       }

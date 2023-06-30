@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/pages/drawerlist.dart';
 import 'package:flutter_auth_page/pages/welcome.dart';
 
-
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
@@ -16,8 +15,10 @@ class MainPage extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              debugPrint("Inside main_page, user has data");
               return const HomeScreen();
             } else {
+              debugPrint("Inside main_page, user data not available");
               return const Welcome();
             }
           }),

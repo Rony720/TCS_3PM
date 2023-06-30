@@ -53,69 +53,69 @@ class DocumentElement {
 }
 
 class Fields {
-    Email? uid;
-    Dob? phone;
-    Email? username;
     Dob? dob;
-    Email? email;
-    Email? medical;
+    Dob? email;
+    Phone? phone;
+    Dob? uid;
+    Dob? medical;
+    Dob? username;
 
     Fields({
-        required this.uid,
-        required this.phone,
-        required this.username,
         required this.dob,
         required this.email,
+        required this.phone,
+        required this.uid,
         required this.medical,
+        required this.username,
     });
 
     factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-        uid: Email.fromJson(json["uid"]),
-        phone: Dob.fromJson(json["phone"]),
-        username: Email.fromJson(json["username"]),
         dob: Dob.fromJson(json["dob"]),
-        email: Email.fromJson(json["email"]),
-        medical: Email.fromJson(json["medical"]),
+        email: Dob.fromJson(json["email"]),
+        phone: Phone.fromJson(json["phone"]),
+        uid: Dob.fromJson(json["uid"]),
+        medical: Dob.fromJson(json["medical"]),
+        username: Dob.fromJson(json["username"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "uid": uid?.toJson(),
-        "phone": phone?.toJson(),
-        "username": username?.toJson(),
-        "dob": dob?.toJson(),
-        "email": email?.toJson(),
-        "medical": medical?.toJson(),
+        "dob": dob!.toJson(),
+        "email": email!.toJson(),
+        "phone": phone!.toJson(),
+        "uid": uid!.toJson(),
+        "medical": medical!.toJson(),
+        "username": username!.toJson(),
     };
 }
 
 class Dob {
-    String? integerValue;
-
-    Dob({
-        required this.integerValue,
-    });
-
-    factory Dob.fromJson(Map<String, dynamic> json) => Dob(
-        integerValue: json["integerValue"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "integerValue": integerValue,
-    };
-}
-
-class Email {
     String? stringValue;
 
-    Email({
+    Dob({
         required this.stringValue,
     });
 
-    factory Email.fromJson(Map<String, dynamic> json) => Email(
+    factory Dob.fromJson(Map<String, dynamic> json) => Dob(
         stringValue: json["stringValue"],
     );
 
     Map<String, dynamic> toJson() => {
         "stringValue": stringValue,
+    };
+}
+
+class Phone {
+    String? integerValue;
+
+    Phone({
+        required this.integerValue,
+    });
+
+    factory Phone.fromJson(Map<String, dynamic> json) => Phone(
+        integerValue: json["integerValue"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "integerValue": integerValue,
     };
 }
