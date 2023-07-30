@@ -246,6 +246,10 @@ class _LoginState extends State<Login> {
                     width: 300,
                     child: ElevatedButton(
                       onPressed: signIn,
+                      // onPressed: () {
+                      //   Navigator.push(context,
+                      //       MaterialPageRoute(builder: (context) => HomeScreen()));
+                      // },
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(kPrimaryColor),

@@ -1,4 +1,3 @@
-
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:hive/hive.dart';
@@ -6,6 +5,7 @@ import 'package:flame/parallax.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/components.dart';
 
+import '../../main.dart';
 import '../dino_game_main.dart';
 import '../game/dino.dart';
 import '../widgets/hud.dart';
@@ -47,6 +47,10 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
   // This method get called while flame is preparing this game.
   @override
   Future<void> onLoad() async {
+    // SET SELECTED GAME AS DINO
+    changer.currentSelectedGame = "DINO";
+    changer.notify();
+
     /// Read [PlayerData] and [Settings] from hive.
     playerData = await _readPlayerData();
     settings = await _readSettings();
@@ -56,7 +60,7 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
 
     // Start playing background music. Internally takes care
     // of checking user settings.
-    AudioManager.instance.startBgm('8BitPlatformerLoop.wav');
+    // AudioManager.instance.startBgm('8BitPlatformerLoop.wav');
 
     // Cache all the images.
     await images.loadAll(_imageAssets);
@@ -122,10 +126,10 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
     }
     super.update(dt);
 
-    if (changer.isDinoHeadUp) {
+    if (changer.isDinoJump) {
       if (overlays.isActive(Hud.id)) {
         _dino.jump();
-        changer.isDinoHeadUp= false;
+        changer.isDinoJump = false;
         changer.notify();
         //print("working");
       }
@@ -145,36 +149,43 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
 
   /// This method reads [PlayerData] from the hive box.
   Future<PlayerData> _readPlayerData() async {
-    final playerDataBox =
-        await Hive.openBox<PlayerData>('DinoRunFace.PlayerDataBox');
-    final playerData = playerDataBox.get('DinoRunFace.PlayerData');
+    final playerDataBox = await Hive.openBox<PlayerData>(
+        '${changer.hiveBoxName[changer.currentSelectedBodyPart]}.PlayerDataBox');
+    final playerData = playerDataBox.get(
+        '${changer.hiveBoxName[changer.currentSelectedBodyPart]}.PlayerData');
 
     // If data is null, this is probably a fresh launch of the game.
     if (playerData == null) {
       // In such cases store default values in hive.
-      await playerDataBox.put('DinoRunFace.PlayerData', PlayerData());
+      await playerDataBox.put(
+          '${changer.hiveBoxName[changer.currentSelectedBodyPart]}.PlayerData',
+          PlayerData());
     }
 
     // Now it is safe to return the stored value.
-    return playerDataBox.get('DinoRunFace.PlayerData')!;
+    return playerDataBox.get(
+        '${changer.hiveBoxName[changer.currentSelectedBodyPart]}.PlayerData')!;
   }
 
   /// This method reads [Settings] from the hive box.
   Future<Settings> _readSettings() async {
-    final settingsBox = await Hive.openBox<Settings>('DinoRunFace.SettingsBox');
-    final settings = settingsBox.get('DinoRunFace.Settings');
+    final settingsBox = await Hive.openBox<Settings>(
+        '${changer.hiveBoxName[changer.currentSelectedBodyPart]}.SettingsBox');
+    final settings = settingsBox.get(
+        '${changer.hiveBoxName[changer.currentSelectedBodyPart]}.Settings');
 
     // If data is null, this is probably a fresh launch of the game.
     if (settings == null) {
       // In such cases store default values in hive.
       await settingsBox.put(
-        'DinoRunFace.Settings',
+        '${changer.hiveBoxName[changer.currentSelectedBodyPart]}.Settings',
         Settings(bgm: true, sfx: true),
       );
     }
 
     // Now it is safe to return the stored value.
-    return settingsBox.get('DinoRunFace.Settings')!;
+    return settingsBox.get(
+        '${changer.hiveBoxName[changer.currentSelectedBodyPart]}.Settings')!;
   }
 
   @override

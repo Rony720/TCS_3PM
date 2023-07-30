@@ -9,7 +9,6 @@ import 'package:flutter_auth_page/pages/welcome.dart';
 import 'package:get/get.dart';
 
 import 'dino/dino_game_main.dart' as dinoHead;
-import 'dino_lower/new_main.dart' as dinoLower;
 import 'firebase_options.dart';
 import 'main_page.dart';
 import 'quizPose/models/Questions.dart';
@@ -20,7 +19,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await dinoHead.initHive();
   await dinoHead.initHive();
-  await dinoLower.initHive();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -54,21 +52,46 @@ class MyApp extends StatelessWidget {
 }
 
 class Changer extends ChangeNotifier {
+  // SELECTED GAMES WILL BE "FLAPPY","DINO","FRUT","QUIZ"
+  String currentSelectedGame = "";
+
+  // SELECTED BODY PART WILL BE "HEAD","HAND","LEG"
+  String currentSelectedBodyPart = "";
+
+  // FLAPPY
+
   int currentBar = 0; // for choosing gap
   late int flappyNosePoint;
   bool firstFrame = true;
-
-  bool isFlappyHeadUp = false; // used in flappy
+  bool isFlappyUp = false; // used in flappy
 
   // FLAPPY ENDS
 
-  // Quiz
+  // DINO
+
+  bool firstFrameDino = true;
+  late int DinoNosePoint;
+  bool isDinoJump = false;
+
+  bool positionCaptureDinoLower = true;
+  double poseStandingDinoLower = 0;
+
+  // Hive BoxNames
+  Map<String, String> hiveBoxName = {
+    'LEG': "DinoRunLeg",
+    'HEAD': "DinoRunFace",
+  };
+
+  // DINO ENDS
+
+  // QUIZ
 
   double poseStanding = 0;
   int selectedOpt_quiz = -1;
   bool positionCapture = true;
-
   late Question myQuestion;
+
+  // QUIZ END
 
   void notify() {
     notifyListeners();

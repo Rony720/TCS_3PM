@@ -8,6 +8,7 @@ import 'package:flame/game.dart';
 import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
 import '../components/background_component.dart';
 import '../components/boy_component.dart';
 import '../components/fruit_component.dart';
@@ -40,6 +41,10 @@ class FruitCollection extends FlameGame
   FutureOr<void> onLoad() async {
     await super.onLoad();
 
+    // Set Selected Game as FRUIT
+    changer.currentSelectedGame = "FRUIT";
+    changer.notify();
+    
     // Initialiszation
     positionReachingAfterRun = "";
     boyRemoved = false;

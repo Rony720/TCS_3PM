@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../dino/dino_game_main.dart';
-import '../flappymainfolder/flappyface/game/flappy_main.dart';
+import '../flappybird/game/flappy_main.dart';
 import '../fruitcollection/game/fruitcollection_main.dart';
 
 // ignore: camel_case_types

@@ -5,10 +5,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../dino/dino_game_main.dart';
-import '../dino_lower/new_main.dart';
-import '../flappy_lower/flappy_lower_main.dart';
-import '../flappymainfolder/flappyface/game/flappy_main.dart';
+import '../flappybird/game/flappy_main.dart';
 import '../fruitcollection/game/fruitcollection_main.dart';
+import '../main.dart' as main;
 import '../quizPose/screen_quiz/welcome/welcome_screen.dart';
 
 // ignore: camel_case_types
@@ -49,10 +48,12 @@ class _GamesLowerState extends State<GamesLower> {
                       child: InkWell(
                         splashColor: Colors.black26,
                         onTap: () {
+                          main.changer.currentSelectedBodyPart = "LEG";
+                          main.changer.notify();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => FlappyPoseDetection(),
+                              builder: (context) => FlappyFaceDetect(),
                             ),
                           );
                         },
@@ -137,6 +138,8 @@ class _GamesLowerState extends State<GamesLower> {
                         child: InkWell(
                           splashColor: Colors.black26,
                           onTap: () {
+                            main.changer.currentSelectedBodyPart = "LEG";
+                            main.changer.notify();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -180,10 +183,12 @@ class _GamesLowerState extends State<GamesLower> {
                     child: InkWell(
                       splashColor: Colors.black26,
                       onTap: () {
+                        main.changer.currentSelectedBodyPart = "LEG";
+                        main.changer.notify();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DinoLower(),
+                            builder: (context) => DinoRunFace(),
                           ),
                         );
                       },

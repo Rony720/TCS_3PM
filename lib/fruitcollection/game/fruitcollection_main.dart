@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
+import '../../MLKIT/facedetection/vision_detector_views/face_detector_view.dart';
 import '../components/gameovermenu_component.dart';
 import '../components/instructionfruit_component.dart';
 import '../components/pausemenu_component.dart';
 import '../components/startmenu_component.dart';
-import '../vision_detector_views/face_detector_view.dart';
 import 'fruitcollection.dart';
 
 class FruitCollectionFace extends StatelessWidget {

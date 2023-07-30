@@ -5,8 +5,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../dino/dino_game_main.dart';
-import '../flappymainfolder/flappyface/game/flappy_main.dart';
+import '../flappybird/game/flappy_main.dart';
 import '../fruitcollection/game/fruitcollection_main.dart';
+import '../main.dart';
 
 // ignore: camel_case_types
 class Games extends StatefulWidget {
@@ -46,6 +47,8 @@ class _GamesState extends State<Games> {
                       child: InkWell(
                         splashColor: Colors.black26,
                         onTap: () {
+                          changer.currentSelectedBodyPart = "HEAD";
+                          changer.notify();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -86,7 +89,9 @@ class _GamesState extends State<Games> {
                       child: InkWell(
                         splashColor: Colors.black26,
                         onTap: () {
-                           Navigator.push(
+                          changer.currentSelectedBodyPart = "HEAD";
+                          changer.notify();
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => FruitCollectionFace(),
@@ -170,12 +175,14 @@ class _GamesState extends State<Games> {
                     child: InkWell(
                       splashColor: Colors.black26,
                       onTap: () {
-                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DinoRunFace(),
-                            ),
-                          );
+                        changer.currentSelectedBodyPart = "HEAD";
+                        changer.notify();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DinoRunFace(),
+                          ),
+                        );
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
