@@ -349,19 +349,35 @@ class FruitCollection extends FlameGame
     Fields fields = Fields(user, score, datee);
     Score outer_score = Score(fields);
     if (should_update_firestore) {
-      var response = await MyBaseClient().post(
-          'score',
-          "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/HFruit/",
-          outer_score);
-    }
-    // Remove all components
-    fruitCollected = 0;
-    fruitMissed = 0;
-    children.forEach((child) {
-      if (child is FruitComponent) remove(child);
-    });
+          if (changer.currentSelectedBodyPart == "HEAD") {
+               var response = await MyBaseClient().post(
+               'head',
+               "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/HFruit/",
+                outer_score);
+      }
 
-    // Add the inital tubes
+      else if (changer.currentSelectedBodyPart == "LEG") {
+        var response = await MyBaseClient().post(
+            'leg',
+            "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/LFruit/",
+            outer_score);
+      }
+
+      else if (changer.currentSelectedBodyPart == "HAND") {
+        var response = await MyBaseClient().post(
+            'hand',
+            "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/UFruit/",
+            outer_score);
+        // Remove all components
+        fruitCollected = 0;
+        fruitMissed = 0;
+        children.forEach((child) {
+          if (child is FruitComponent) remove(child);
+        });
+
+        // Add the inital tubes
+      }
+    }
   }
 
   void removeAllExit() {

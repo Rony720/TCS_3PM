@@ -73,7 +73,7 @@ class PauseMenu extends StatelessWidget {
                         gameRef.overlays.remove(PauseMenu.id);
                         gameRef.overlays.add(Hud.id);
                         gameRef.resumeEngine();
-                        gameRef.reset();
+                        gameRef.reset(false);
                         gameRef.startGamePlay();
                         AudioManager.instance.resumeBgm();
                       },
@@ -86,14 +86,14 @@ class PauseMenu extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        gameRef.reset();
+                        gameRef.reset(false);
                         Navigator.pop(
                           context,
                         );
                         gameRef.overlays.remove(PauseMenu.id);
                         gameRef.overlays.add(MainMenu.id);
                         gameRef.resumeEngine();
-                        gameRef.reset();
+                        gameRef.reset(false);
                         AudioManager.instance.pauseBgm();
                       },
                       child: const Text(

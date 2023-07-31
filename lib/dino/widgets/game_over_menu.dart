@@ -69,7 +69,7 @@ class GameOverMenu extends StatelessWidget {
                         Get.back();
                         gameRef.overlays.remove(GameOverMenu.id);
                         gameRef.resumeEngine();
-                        gameRef.reset();
+                        gameRef.reset(true);
                         AudioManager.instance.resumeBgm();
                       },
                     ),
@@ -82,7 +82,7 @@ class GameOverMenu extends StatelessWidget {
                       ),
                       onPressed: () {
                         gameRef.overlays.remove(GameOverMenu.id);
-                        gameRef.reset();
+                        gameRef.reset(true);
                         Navigator.pop(
                           context,
                         );
