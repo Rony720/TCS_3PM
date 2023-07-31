@@ -569,7 +569,7 @@ class _SignupState extends State<Signup> {
         "username": {"stringValue": name}
       }
     };
-    var response = await MyBaseClient().post('', body);
+    var response = await MyBaseClient().post('signup', "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/users/", body);
 
     if (response != null) {
       debugPrint("POST SUCCESS");

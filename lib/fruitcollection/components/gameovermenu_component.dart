@@ -47,10 +47,10 @@ class GameOverMenu extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 7, 77, 255),
                         padding: EdgeInsets.all(12)),
-                    onPressed: () {
+                    onPressed: ()  {
                       gameRef.overlays.remove('GameOverMenu');
                       gameRef.isGamePaused = false;
-                      gameRef.reset();
+                      gameRef.reset(true);
                     },
                     child: const Text(
                       'Restart',
@@ -67,7 +67,7 @@ class GameOverMenu extends StatelessWidget {
                     onPressed: () {
                       gameRef.isGamePaused = false;
                       gameRef.removeAllExit();
-                      gameRef.reset();
+                      gameRef.reset(true);
                       Navigator.pop(context);
                     },
                     child: const Text(

@@ -7,12 +7,18 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_page/API/users.dart';
 
 import '../../main.dart';
 import '../components/background_component.dart';
 import '../components/boy_component.dart';
 import '../components/fruit_component.dart';
 import '../components/pausebutton_component.dart';
+import '../../API/base_client.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 late BoyComponent boy;
 
@@ -28,6 +34,85 @@ late String head;
 
 late PauseButton pauseButton;
 
+class Score {
+  // String? user;
+  Fields? fields;
+  // DateTime? createTime;
+  //DateTime? updateTime;
+
+  Score(
+    //required this.name,
+    this.fields,
+    // required this.createTime,
+    // required this.updateTime,
+  );
+
+  // factory DocumentElement.fromJson(Map<String, dynamic> json) =>
+  //     DocumentElement(
+  //       // name: json["name"],
+  //       fields: Fields.fromJson(json["fields"]),
+  //       ////createTime: DateTime.parse(json["createTime"]),
+  //       //updateTime: DateTime.parse(json["updateTime"]),
+  //     );
+
+  Map<String, dynamic> toJson() => {
+        // "name": name,
+        "fields": fields?.toJson(),
+        // "createTime": createTime?.toIso8601String(),
+        // "updateTime": updateTime?.toIso8601String(),
+      };
+}
+
+class Fields {
+  Dob? user;
+  Firebase_score? score;
+  Firebase_date_time date;
+  //Phone? phone;
+
+  Fields(this.user, this.score, this.date
+      // required this.phone,
+      // required this.uid,
+      // required this.medical,
+      // required this.username,
+      );
+
+  Map<String, dynamic> toJson() =>
+      {"user": user, "score": score, "date": date.toJson()};
+}
+
+class Firebase_score {
+  int? integerValue;
+
+  Firebase_score({
+    required this.integerValue,
+  });
+
+  factory Firebase_score.fromJson(Map<String, dynamic> json) => Firebase_score(
+        integerValue: json["integerValue"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "integerValue": integerValue,
+      };
+}
+
+class Firebase_date_time {
+  DateTime dateTimeValue;
+
+  Firebase_date_time({
+    required this.dateTimeValue,
+  });
+
+  factory Firebase_date_time.fromJson(Map<String, dynamic> json) =>
+      Firebase_date_time(
+        dateTimeValue: json["stringValue"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "stringValue": dateTimeValue.toIso8601String(),
+      };
+}
+
 class FruitCollection extends FlameGame
     with HasTappables, HasCollisionDetection {
   late TextComponent scoreComponent;
@@ -36,6 +121,32 @@ class FruitCollection extends FlameGame
   late int fruitCollected;
   late int fruitMissed;
   bool isGamePaused = true;
+  String email = "";
+
+  Future fetch_user_email() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+
+    var response = await MyBaseClient().get('');
+    if (response != null) {
+      var users = documentFromJson(response);
+      debugPrint(users.documents!.length.toString());
+      for (int i = 0; i < users.documents!.length; i++) {
+        debugPrint("inside loop");
+        if (users.documents![i].fields!.uid!.stringValue == uid.toString()) {
+          debugPrint("GOT IT");
+
+          email = users.documents![i].fields!.email!.stringValue.toString();
+          debugPrint(email);
+
+          debugPrint(email);
+          return email;
+        }
+      }
+    }
+  }
 
   @override
   FutureOr<void> onLoad() async {
@@ -44,7 +155,7 @@ class FruitCollection extends FlameGame
     // Set Selected Game as FRUIT
     changer.currentSelectedGame = "FRUIT";
     changer.notify();
-    
+
     // Initialiszation
     positionReachingAfterRun = "";
     boyRemoved = false;
@@ -128,7 +239,7 @@ class FruitCollection extends FlameGame
   }
 
   @override
-  void update(double dt) {
+  void update(double dt) async {
     super.update(dt);
 
     // End Game
@@ -222,10 +333,30 @@ class FruitCollection extends FlameGame
     }
   }
 
-  void reset() {
+  void reset(bool should_update_firestore) async {
+    print("reset called");
+
+    String user_email = await fetch_user_email() as String;
+    Firebase_score score = Firebase_score(
+      integerValue: fruitCollected,
+    );
+    Dob user = Dob(
+      stringValue: user_email,
+    );
+    Firebase_date_time datee =
+        Firebase_date_time(dateTimeValue: DateTime.now());
+
+    Fields fields = Fields(user, score, datee);
+    Score outer_score = Score(fields);
+    if (should_update_firestore) {
+      var response = await MyBaseClient().post(
+          'score',
+          "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/HFruit/",
+          outer_score);
+    }
+    // Remove all components
     fruitCollected = 0;
     fruitMissed = 0;
-    // Remove all components
     children.forEach((child) {
       if (child is FruitComponent) remove(child);
     });
@@ -279,3 +410,17 @@ void rightControl() {
     print(positionReachingAfterRun);
   }
 }
+
+ /*Dob score=  Dob(
+        stringValue: "score",
+    );
+     Dob user=  Dob(
+        stringValue: "user",
+    );
+
+    Fields fields = Fields(score, user);
+    Score outer_score = Score(fields);
+
+    var response = await MyBaseClient().post(
+      "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/HFruit/",outer_score
+    );*/

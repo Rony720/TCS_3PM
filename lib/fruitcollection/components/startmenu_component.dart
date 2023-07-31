@@ -39,7 +39,7 @@ class StartMenu extends StatelessWidget {
                         backgroundColor: Colors.amber,
                         padding: EdgeInsets.all(12)),
                     onPressed: () {
-                      gameRef.reset();
+                      gameRef.reset(false);
                       gameRef.overlays.remove('StartMenu');
                       gameRef.overlays.add('InstructionFruit');
                     },
