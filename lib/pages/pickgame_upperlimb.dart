@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import '../dino/dino_game_main.dart';
 import '../flappybird/game/flappy_main.dart';
 import '../fruitcollection/game/fruitcollection_main.dart';
+import '../main.dart' as main;
 
 // ignore: camel_case_types
 class GamesUpper extends StatefulWidget {
@@ -46,6 +47,8 @@ class _GamesUpperState extends State<GamesUpper> {
                       child: InkWell(
                         splashColor: Colors.black26,
                         onTap: () {
+                          main.changer.currentSelectedBodyPart = "HAND";
+                          main.changer.notify();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -86,7 +89,9 @@ class _GamesUpperState extends State<GamesUpper> {
                       child: InkWell(
                         splashColor: Colors.black26,
                         onTap: () {
-                           Navigator.push(
+                          main.changer.currentSelectedBodyPart = "HAND";
+                          main.changer.notify();
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => FruitCollectionFace(),
@@ -136,22 +141,6 @@ class _GamesUpperState extends State<GamesUpper> {
                           onTap: () {},
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Ink.image(
-                                image: AssetImage('assets/images/balloon.jpg'),
-                                height: 150,
-                                width: 150,
-                                fit: BoxFit.cover,
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text(
-                                'Balloon Pop',
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                              )
-                            ],
                           ),
                         ),
                       ),
@@ -170,12 +159,14 @@ class _GamesUpperState extends State<GamesUpper> {
                     child: InkWell(
                       splashColor: Colors.black26,
                       onTap: () {
-                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DinoRunFace(),
-                            ),
-                          );
+                        main.changer.currentSelectedBodyPart = "HAND";
+                        main.changer.notify();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DinoRunFace(),
+                          ),
+                        );
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,

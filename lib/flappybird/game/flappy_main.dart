@@ -1,8 +1,10 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import '../components/instruction_page_upper.dart';
 
 import '../../MLKIT/facedetection/vision_detector_views/face_detector_view.dart';
 import '../../MLKIT/lowerposedetection/vision_detector_views/pose_detector_view.dart';
+import '../../MLKIT/upperposedetection/vision_detector_views/pose_detector_view_upper.dart';
 import '../../main.dart';
 import '../components/gameovermenu_component.dart';
 import '../components/instruction_page_head.dart';
@@ -40,9 +42,13 @@ class FlappyFaceDetect extends StatelessWidget {
                     ? InstructionFlappyHead(
                         gameRef: flappyBird,
                       )
-                    : InstructionFlappyLeg(
-                        gameRef: flappyBird,
-                      );
+                    : changer.currentSelectedBodyPart == "HAND"
+                        ? InstructionFlappyShoulder(
+                            gameRef: flappyBird,
+                          )
+                        : InstructionFlappyLeg(
+                            gameRef: flappyBird,
+                          );
               },
             },
           ),
@@ -52,7 +58,9 @@ class FlappyFaceDetect extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.35,
           child: changer.currentSelectedBodyPart == "HEAD"
               ? FaceDetectorView()
-              : const PoseDetectorView(),
+              : changer.currentSelectedBodyPart == "HAND"
+                  ? const PoseDetectorViewHand()
+                  : const PoseDetectorView(),
         ),
       ],
     ));

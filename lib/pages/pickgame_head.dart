@@ -141,22 +141,6 @@ class _GamesState extends State<Games> {
                           onTap: () {},
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Ink.image(
-                                image: AssetImage('assets/images/balloon.jpg'),
-                                height: 150,
-                                width: 150,
-                                fit: BoxFit.cover,
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Text(
-                                'Balloon Pop',
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                              )
-                            ],
                           ),
                         ),
                       ),

@@ -2,7 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/dino/widgets/instructiondino_head.dart';
 import 'package:flutter_auth_page/dino/widgets/instructiondino_lower.dart';
-
+import 'package:flutter_auth_page/dino/widgets/instructiondino_upper.dart';
 import '../main.dart';
 import 'widgets/hud.dart';
 import 'game/dino_run.dart';
@@ -42,7 +42,11 @@ class DinoRunApp extends StatelessWidget {
               ),
           SettingsMenu.id: (_, DinoRun gameRef) => SettingsMenu(gameRef),
           'InstructionDino': (_, DinoRun gameRef) {
-            return changer.currentSelectedBodyPart == "HEAD" ?InstructionDinoHead(gameRef) : InstructionDinoLeg(gameRef);
+            return changer.currentSelectedBodyPart == "HEAD"
+                ? InstructionDinoHead(gameRef)
+                : changer.currentSelectedBodyPart == "HAND"
+                    ? InstructionDinoHand(gameRef)
+                    : InstructionDinoLeg(gameRef);
           },
         },
         // By default MainMenu overlay will be active.

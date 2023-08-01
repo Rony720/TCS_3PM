@@ -80,46 +80,6 @@ class _GamesLowerState extends State<GamesLower> {
                 Material(
                     color: Colors.white,
                     child: SizedBox(height: 100, width: 200)),
-                Flexible(
-                  child: Container(
-                    child: Material(
-                      color: Colors.cyan,
-                      //elevation: 8,
-                      borderRadius: BorderRadius.circular(20),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: InkWell(
-                        splashColor: Colors.black26,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FruitCollectionFace(),
-                            ),
-                          );
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Ink.image(
-                              image: AssetImage('assets/images/fruit.jpg'),
-                              height: 150,
-                              width: 150,
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Text(
-                              'Fruit Collection',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ]),
               Material(
                   color: Colors.white, child: SizedBox(height: 10, width: 10)),

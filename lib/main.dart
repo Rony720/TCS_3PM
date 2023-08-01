@@ -65,6 +65,9 @@ class Changer extends ChangeNotifier {
   bool firstFrame = true;
   bool isFlappyUp = false; // used in flappy
 
+  bool changeframe = false;
+  late double flappyright, flappyleft;
+
   // FLAPPY ENDS
 
   // DINO
@@ -80,9 +83,18 @@ class Changer extends ChangeNotifier {
   Map<String, String> hiveBoxName = {
     'LEG': "DinoRunLeg",
     'HEAD': "DinoRunFace",
+    'HAND':"DinoRunHand"
   };
 
+  bool isDinoUp = false;
+  late double dinoWrist;
+  bool position = false;
   // DINO ENDS
+
+  //FRUIT
+  bool frame = true;
+  late double fruitleft, fruitright;
+  //FRUIT ENDS
 
   // QUIZ
 
