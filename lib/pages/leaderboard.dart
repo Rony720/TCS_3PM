@@ -158,7 +158,8 @@ class _progressPageState extends State<progressPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => UpperChart(),
+                            builder: (context) => UpperChart
+                            (),
                           ),
                         );
                       },
