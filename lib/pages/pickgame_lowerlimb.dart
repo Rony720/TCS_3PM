@@ -8,7 +8,7 @@ import '../dino/dino_game_main.dart';
 import '../flappybird/game/flappy_main.dart';
 import '../fruitcollection/game/fruitcollection_main.dart';
 import '../main.dart' as main;
-import '../quizPose/screen_quiz/welcome/welcome_screen.dart';
+import '../quiz_notimer/screens/main_menu.dart';
 
 // ignore: camel_case_types
 class GamesLower extends StatefulWidget {
@@ -103,7 +103,7 @@ class _GamesLowerState extends State<GamesLower> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const WelcomeScreen(),
+                                builder: (context) => const MainMenu(),
                               ),
                             );
                           },
