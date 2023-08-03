@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/pages/login.dart';
 import 'package:flutter_auth_page/pages/signup.dart';
 import 'package:flutter_auth_page/pages/welcome.dart';
+import 'package:flutter_auth_page/quiz_notimer/model/question_model.dart';
 import 'package:get/get.dart';
 
 import 'dino/dino_game_main.dart' as dinoHead;
 import 'firebase_options.dart';
 import 'main_page.dart';
-import 'quizPose/models/Questions.dart';
+import './quiz_notimer/data/questions_example.dart';
+import './quiz_notimer/screens/main_menu.dart';
 
 List<CameraDescription> cameras = [];
 final Changer changer = Changer();
@@ -83,7 +85,7 @@ class Changer extends ChangeNotifier {
   Map<String, String> hiveBoxName = {
     'LEG': "DinoRunLeg",
     'HEAD': "DinoRunFace",
-    'HAND':"DinoRunHand"
+    'HAND': "DinoRunHand"
   };
 
   bool isDinoUp = false;
@@ -99,9 +101,11 @@ class Changer extends ChangeNotifier {
   // QUIZ
 
   double poseStanding = 0;
-  int selectedOpt_quiz = -1;
+  int currentSelectedOption = 0;
   bool positionCapture = true;
-  late Question myQuestion;
+  bool confirmAnswer = false;
+  
+  late QuestionModel myQuestion;
 
   // QUIZ END
 
