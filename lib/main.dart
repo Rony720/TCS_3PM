@@ -8,6 +8,11 @@ import 'package:flutter_auth_page/pages/signup.dart';
 import 'package:flutter_auth_page/pages/welcome.dart';
 import 'package:flutter_auth_page/quiz_notimer/model/question_model.dart';
 import 'package:get/get.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:flutter_auth_page/pages/headprogress.dart';
+import 'package:flutter_auth_page/pages/lowerprogress.dart';
+import 'package:flutter_auth_page/pages/upperprogress.dart';
 
 import 'dino/dino_game_main.dart' as dinoHead;
 import 'firebase_options.dart';
@@ -48,6 +53,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MainPage(),
         '/login': (context) => const Login(),
         '/signup': (context) => const Signup(),
+        '/headchart' : (context) => const HeadChart(),
+        '/lowerchart' : (context) => const LowerChart(),
+        '/upperchart' : (context) => const UpperChart(),
       },
     );
   }

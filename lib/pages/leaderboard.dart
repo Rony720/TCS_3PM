@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import '../pages/headprogress.dart';
 import '../pages/upperprogress.dart';
 
@@ -192,3 +192,83 @@ class _progressPageState extends State<progressPage> {
     );
   }
 }
+*/
+
+
+
+import 'package:flutter/material.dart';
+import '../pages/headprogress.dart';
+import '../pages/upperprogress.dart';
+
+import '../pages/lowerprogress.dart';
+import '../main.dart';
+
+
+class progressPage extends StatefulWidget {
+  @override
+  State<progressPage> createState() => _progressPageState();
+}
+
+class _progressPageState extends State<progressPage> {
+  @override
+  Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Progress Check'),
+        backgroundColor: Colors.cyan,
+      ),
+       body: Padding(
+        padding: EdgeInsets.only(top: 50),
+       child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+
+            Image.asset(
+              'assets/images/chart.png',
+              width:150,
+              height:150,
+            ),
+            SizedBox(height:20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/headchart');
+              },
+              style : ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(16),
+                textStyle: TextStyle(fontSize:20),
+              ),
+              child: Text('Head Chart'),
+            ),
+            SizedBox(height : 10),
+            ElevatedButton(
+              onPressed: () {
+                 Navigator.pushNamed(context, '/upperchart');
+              },
+              style : ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(16),
+                textStyle: TextStyle(fontSize:20),
+              ),
+              child: Text('Upper Chart'),
+            ),
+            SizedBox(height:10),
+            ElevatedButton(
+              onPressed: () {
+                 Navigator.pushNamed(context, '/lowerchart');
+              },
+              style : ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(16),
+                textStyle: TextStyle(fontSize:20),
+              ),
+              child: Text('Lower Chart'),
+            ),
+          ],
+        ),
+      ),
+       ),
+    );
+  }
+}
+

@@ -41,7 +41,7 @@ class _GamesLowerState extends State<GamesLower> {
                 Flexible(
                   child: Container(
                     child: Material(
-                      color: Colors.cyan,
+                      color: Colors.white,
                       //elevation: 8,
                       borderRadius: BorderRadius.circular(20),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -70,7 +70,7 @@ class _GamesLowerState extends State<GamesLower> {
                           ),
                           Text(
                             'Flappy Bird',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           )
                         ]),
                       ),
@@ -91,7 +91,7 @@ class _GamesLowerState extends State<GamesLower> {
                   Flexible(
                     child: Container(
                       child: Material(
-                        color: Colors.cyan,
+                        color: Colors.white,
                         // elevation: 8,
                         borderRadius: BorderRadius.circular(20),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -122,7 +122,7 @@ class _GamesLowerState extends State<GamesLower> {
                               Text(
                                 'Quiz',
                                 style: TextStyle(
-                                    fontSize: 20, color: Colors.white),
+                                    fontSize: 18, color: Colors.black),
                               )
                             ],
                           ),
@@ -136,7 +136,7 @@ class _GamesLowerState extends State<GamesLower> {
                   Flexible(
                       child: Container(
                           child: Material(
-                    color: Colors.cyan,
+                    color: Colors.white,
                     // elevation: 8,
                     borderRadius: BorderRadius.circular(20),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -166,7 +166,7 @@ class _GamesLowerState extends State<GamesLower> {
                           ),
                           Text(
                             'Dino Run',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           )
                         ],
                       ),

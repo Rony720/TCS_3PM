@@ -40,12 +40,12 @@ class _GamesState extends State<Games> {
                 Flexible(
                   child: Container(
                     child: Material(
-                      color: Colors.cyan,
+                      color: Colors.white,
                       //elevation: 8,
                       borderRadius: BorderRadius.circular(20),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: InkWell(
-                        splashColor: Colors.black26,
+                        splashColor: Colors.white,
                         onTap: () {
                           changer.currentSelectedBodyPart = "HEAD";
                           changer.notify();
@@ -69,7 +69,7 @@ class _GamesState extends State<Games> {
                           ),
                           Text(
                             'Flappy Bird',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           )
                         ]),
                       ),
@@ -82,8 +82,9 @@ class _GamesState extends State<Games> {
                 Flexible(
                   child: Container(
                     child: Material(
-                      color: Colors.cyan,
+                      color: Colors.white,
                       //elevation: 8,
+                       
                       borderRadius: BorderRadius.circular(20),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: InkWell(
@@ -113,7 +114,7 @@ class _GamesState extends State<Games> {
                             Text(
                               'Fruit Collection',
                               style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                                  TextStyle(fontSize: 18, color: Colors.black),
                             )
                           ],
                         ),
@@ -132,7 +133,7 @@ class _GamesState extends State<Games> {
                   Flexible(
                     child: Container(
                       child: Material(
-                        color: Colors.cyan,
+                        color: Colors.white,
                         // elevation: 8,
                         borderRadius: BorderRadius.circular(20),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -152,7 +153,7 @@ class _GamesState extends State<Games> {
                   Flexible(
                       child: Container(
                           child: Material(
-                    color: Colors.cyan,
+                    color: Colors.white,
                     // elevation: 8,
                     borderRadius: BorderRadius.circular(20),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -182,7 +183,7 @@ class _GamesState extends State<Games> {
                           ),
                           Text(
                             'Dino Run',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
                           )
                         ],
                       ),

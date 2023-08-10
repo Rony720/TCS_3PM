@@ -92,7 +92,7 @@ class _WelcomeState extends State<Welcome> {
                     ),
                     const SizedBox(height: 16),
                     SizedBox(
-                      width: 300,
+                      width: 300, 
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/signup');
