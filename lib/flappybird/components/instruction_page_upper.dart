@@ -62,8 +62,9 @@ class InstructionFlappyShoulder extends StatelessWidget {
                         backgroundColor: Color.fromARGB(255, 7, 77, 255),
                         padding: EdgeInsets.all(12)),
                     onPressed: () {
-                      gameRef.isGamePaused = false;
                       gameRef.overlays.remove('InstructionFlappy');
+
+                      gameRef.overlays.add('Sensitivity');
                     },
                     child: const Text(
                       'Continue',

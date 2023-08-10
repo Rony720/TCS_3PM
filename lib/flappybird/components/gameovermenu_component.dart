@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_auth_page/main.dart';
 
 import '../game/flappy_bird.dart';
 
@@ -48,7 +49,8 @@ class GameOverMenu extends StatelessWidget {
                         padding: EdgeInsets.all(12)),
                     onPressed: () {
                       gameRef.overlays.remove('GameOverMenu');
-                      gameRef.isGamePaused = false;
+                      changer.isGamePaused = false;
+                      changer.notify();
                       gameRef.reset(true);
                     },
                     child: const Text(
@@ -64,7 +66,8 @@ class GameOverMenu extends StatelessWidget {
                         backgroundColor: Colors.amber,
                         padding: EdgeInsets.all(12)),
                     onPressed: () {
-                      gameRef.isGamePaused = false;
+                      changer.isGamePaused = false;
+                      changer.notify();
                       gameRef.removeAllExit();
                       gameRef.reset(true);
                       Navigator.pop(context);

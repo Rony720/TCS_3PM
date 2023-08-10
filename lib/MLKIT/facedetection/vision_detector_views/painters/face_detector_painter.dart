@@ -38,7 +38,10 @@ class FaceDetectorPainter extends CustomPainter {
           for (final Point point in faceContour!.points) {
             // FLAPPY BIRD
 
-            if (changer.currentSelectedGame == "FLAPPY") {
+            if (!changer.isPauseMenu && changer.currentSelectedGame == "FLAPPY" &&
+                ((changer.sensitivity == 1) ||
+                    (changer.sensitivity == 0 &&
+                        changer.isGamePaused == true))) {
               if (type == FaceContourType.noseBottom) {
                 // first frame is fixed point
 
@@ -63,6 +66,11 @@ class FaceDetectorPainter extends CustomPainter {
                     changer.notify();
 
                     print("FLAPPY JUMPED");
+
+                    if (changer.sensitivity == 0) {
+                      changer.isGamePaused = false;
+                      changer.notify();
+                    }
                   } else if (point.y.abs() > changer.flappyNosePoint.abs()) {
                     changer.flappyNosePoint = point.y as int;
                     changer.notify();

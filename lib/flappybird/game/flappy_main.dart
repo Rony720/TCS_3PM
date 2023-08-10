@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_page/flappybird/components/sensitivity_selection.dart';
 import '../components/instruction_page_upper.dart';
 
 import '../../MLKIT/facedetection/vision_detector_views/face_detector_view.dart';
@@ -9,6 +10,7 @@ import '../../main.dart';
 import '../components/gameovermenu_component.dart';
 import '../components/instruction_page_head.dart';
 import '../components/instruction_page_lower.dart';
+import '../components/pauseMenu.dart';
 import '../components/startmenu_component.dart';
 import 'flappy_bird.dart';
 
@@ -33,6 +35,16 @@ class FlappyFaceDetect extends StatelessWidget {
               },
               'GameOverMenu': (BuildContext context, FlappyBird flappyBird) {
                 return GameOverMenu(
+                  gameRef: flappyBird,
+                );
+              },
+              'Sensitivity': (BuildContext context, FlappyBird flappyBird) {
+                return SensitivityFlappy(
+                  gameRef: flappyBird,
+                );
+              },
+              'PauseMenu': (BuildContext context, FlappyBird flappyBird) {
+                return PauseMenuFlappy(
                   gameRef: flappyBird,
                 );
               },

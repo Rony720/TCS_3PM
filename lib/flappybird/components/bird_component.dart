@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
+import '../../main.dart';
 import '../game/flappy_bird.dart';
 import 'toptube_component.dart';
 import 'bottomtube_component.dart';
@@ -44,7 +45,7 @@ class BirdComponent extends SpriteGroupComponent<BirdWingsState>
     super.update(dt);
 
     // Game Paused
-    if (gameRef.isGamePaused) return;
+    if (changer.isGamePaused) return;
 
     // Changing wings to make it look fly
     if (wingsDown) {
@@ -55,7 +56,36 @@ class BirdComponent extends SpriteGroupComponent<BirdWingsState>
       current = BirdWingsState.down;
     }
 
-    position.y += 0.75;
+    if (changer.sensitivity == 0) {
+      gameRef.children.forEach((child) {
+        // if (child is ToptubeComponent) {
+        //   if (position.y < (child.y * 1.1)) // 10 percent
+        //   {
+        //     position.y += 1.5;
+        //   }
+        // }
+
+        if (child is BottomtubeComponent) {
+          if (position.y < (child.y * 0.99) &&
+              child.isPassed == false) // .99 makes hit
+          {
+            position.y += 1.5;
+          } else if (position.y > (child.y * 1.3) && child.isPassed == false) {
+            position.y -= 1.5;
+          }
+
+          if (child.x < position.x * 1.3 && child.isPassed == false) {
+            changer.isGamePaused = true;
+            changer.notify();
+            child.isPassed = true;
+          }
+        }
+      });
+    }
+
+    if (changer.sensitivity != 0) {
+      position.y += 0.75;
+    }
   }
 
   @override
@@ -63,9 +93,10 @@ class BirdComponent extends SpriteGroupComponent<BirdWingsState>
     super.onCollision(intersectionPoints, other);
 
     if ((other is ToptubeComponent || other is BottomtubeComponent) &&
-        gameRef.isGamePaused == false) {
+        changer.isGamePaused == false) {
       FlameAudio.play('flappySound.mp3');
-      gameRef.isGamePaused = true;
+      changer.isGamePaused = true;
+      changer.notify();
 
       // GameOverMenu overlay
       gameRef.overlays.add('GameOverMenu');

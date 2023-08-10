@@ -12,6 +12,7 @@ import '../../main.dart';
 import '../components/background_component.dart';
 import '../components/bird_component.dart';
 import '../components/bottomtube_component.dart';
+import '../components/pausebutton.dart';
 import '../components/toptube_component.dart';
 
 FlappyBird flappyBird = FlappyBird();
@@ -97,7 +98,6 @@ class Firebase_date_time {
 }
 
 class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
-  bool isGamePaused = true;
   int score = 0;
   late TextComponent scoreComponent;
   String email = "";
@@ -131,12 +131,19 @@ class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
   FutureOr<void> onLoad() async {
     await super.onLoad();
 
+    changer.isGamePaused = true;
+    changer.isPauseMenu = false;
+    changer.sensitivity = -1;
+    changer.notify();
     // Set Game Selected as Flappy
     changer.currentSelectedGame = "FLAPPY";
     changer.notify();
 
+    // Pause Button
+    add(PauseButton());
+
     // Load audio
-    FlameAudio.audioCache.loadAll(['flappySound.mp3']);
+    FlameAudio.audioCache.loadAll(['flappySound.mp3', 'flappyReward.mpeg']);
 
     // Background
     add(BackgroundComponent());
@@ -191,9 +198,11 @@ class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
         textRenderer: scoreComponentPaint);
 
     add(scoreComponent);
+    add(PauseButton());
 
     // Overlay - StartMenu
-    isGamePaused = true;
+    changer.isGamePaused = true;
+    changer.notify();
     overlays.add('StartMenu');
   }
 
@@ -205,7 +214,7 @@ class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
     scoreComponent.text = '${score}';
 
     // Game Paused
-    if (isGamePaused) return;
+    if (changer.isGamePaused) return;
 
     // face
     if (changer.isFlappyUp) {
@@ -216,9 +225,23 @@ class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
   }
 
   void reset(bool should_update_firestore) async {
+    int scoreFirestore = score;
+    score = 0;
+    bird.position.y = size[1] / 2;
+
+    // Remove all components
+    children.forEach((child) {
+      if (child is ToptubeComponent || child is BottomtubeComponent)
+        remove(child);
+    });
+
+    // Add the inital tubes
+    add(ToptubeComponent(0.30));
+    add(BottomtubeComponent(0.30));
+
     String user_email = await fetch_user_email() as String;
     Firebase_score scoree = Firebase_score(
-      integerValue: score,
+      integerValue: scoreFirestore,
     );
     Dob user = Dob(
       stringValue: user_email,
@@ -246,18 +269,6 @@ class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
             outer_score);
       }
     }
-    score = 0;
-    bird.position.y = size[1] / 2;
-
-    // Remove all components
-    children.forEach((child) {
-      if (child is ToptubeComponent || child is BottomtubeComponent)
-        remove(child);
-    });
-
-    // Add the inital tubes
-    add(ToptubeComponent(0.30));
-    add(BottomtubeComponent(0.30));
   }
 
   void removeAllExit() {

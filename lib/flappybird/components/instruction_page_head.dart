@@ -33,7 +33,8 @@ class InstructionFlappyHead extends StatelessWidget {
                         fontSize: 50,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
-                  ), const Text(
+                  ),
+                  const Text(
                     'To make your bird jump in the game,\nsimply turn your face upwards,\nand your bird will flap its wings\nand soar through the obstacles!',
                     style: TextStyle(
                         fontSize: 30,
@@ -43,11 +44,13 @@ class InstructionFlappyHead extends StatelessWidget {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber,
-                        padding:const EdgeInsets.all(12)),
+                        padding: const EdgeInsets.all(12)),
                     onPressed: () {
-                      gameRef.isGamePaused = false;
-               
+                      // gameRef.isGamePaused = false;
+
                       gameRef.overlays.remove('InstructionFlappy');
+
+                      gameRef.overlays.add('Sensitivity');
                     },
                     child: const Text(
                       'Continue',

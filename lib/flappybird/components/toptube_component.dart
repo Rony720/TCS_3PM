@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import '../../main.dart';
 import '../game/flappy_bird.dart';
@@ -47,7 +48,7 @@ class ToptubeComponent extends SpriteComponent with HasGameRef<FlappyBird> {
     super.update(dt);
 
     // Game Paused
-    if (gameRef.isGamePaused) return;
+    if (changer.isGamePaused) return;
     // Position changing with 10 percent
 
     if (position.x < (screenWidth - (screenWidth * 0.65)) && !midWay) {
@@ -57,6 +58,8 @@ class ToptubeComponent extends SpriteComponent with HasGameRef<FlappyBird> {
       // Score Update
       final newText = "${gameRef.score}";
       gameRef.scoreComponent.text = newText;
+
+      FlameAudio.play('flappyReward.mpeg');
 
       // Adding new tubes
       midWay = true;

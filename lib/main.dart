@@ -53,9 +53,9 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MainPage(),
         '/login': (context) => const Login(),
         '/signup': (context) => const Signup(),
-        '/headchart' : (context) => const HeadChart(),
-        '/lowerchart' : (context) => const LowerChart(),
-        '/upperchart' : (context) => const UpperChart(),
+        '/headchart': (context) => const HeadChart(),
+        '/lowerchart': (context) => const LowerChart(),
+        '/upperchart': (context) => const UpperChart(),
       },
     );
   }
@@ -67,6 +67,12 @@ class Changer extends ChangeNotifier {
 
   // SELECTED BODY PART WILL BE "HEAD","HAND","LEG"
   String currentSelectedBodyPart = "";
+
+  // For All Games
+
+  bool isGamePaused = true;
+  int sensitivity = -1; // 0 - Practice  1 - Normal
+  bool isPauseMenu = false;
 
   // FLAPPY
 
@@ -112,7 +118,7 @@ class Changer extends ChangeNotifier {
   int currentSelectedOption = 0;
   bool positionCapture = true;
   bool confirmAnswer = false;
-  
+
   late QuestionModel myQuestion;
 
   // QUIZ END

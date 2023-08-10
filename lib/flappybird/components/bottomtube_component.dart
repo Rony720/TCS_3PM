@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
+import '../../main.dart';
 import '../game/flappy_bird.dart';
 
 // Total gap is 0.40
@@ -11,6 +12,7 @@ class BottomtubeComponent extends SpriteComponent with HasGameRef<FlappyBird> {
   late double screenWidth;
   late double screenHeight;
   late double gap;
+  bool isPassed = false;
 
   BottomtubeComponent(this.gap);
 
@@ -41,7 +43,7 @@ class BottomtubeComponent extends SpriteComponent with HasGameRef<FlappyBird> {
   void update(double dt) {
     super.update(dt);
     // Game Paused
-    if (gameRef.isGamePaused) return;
+    if (changer.isGamePaused) return;
     // Position changing with 10 percent
     if (position.x < (0 - screenWidth * 0.10)) {
       removeFromParent();
