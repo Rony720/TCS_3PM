@@ -24,7 +24,7 @@ class _GamesState extends State<Games> {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pick a game!'),
+        title: Text('HEAD'),
         backgroundColor: Colors.cyan,
       ),
       body: Container(
@@ -36,7 +36,7 @@ class _GamesState extends State<Games> {
               Column(children: [
                 Material(
                     color: Colors.white,
-                    child: SizedBox(height: h/10, width: w/2)),
+                    child: SizedBox(height: h / 10, width: w / 2)),
                 Flexible(
                   child: Container(
                     child: Material(
@@ -60,21 +60,21 @@ class _GamesState extends State<Games> {
                             Column(mainAxisSize: MainAxisSize.min, children: [
                           Ink.image(
                             image: AssetImage('assets/images/flappy.jpg'),
-                            height: h/4.5,
-                            width: w/2.5,
+                            height: h / 4.5,
+                            width: w / 2.5,
                             fit: BoxFit.cover,
                           ),
                           SizedBox(
-                            height: h/35,
+                            height: h / 35,
                           ),
                           Align(
-                            alignment: Alignment.center,
-                            child:Text(
-                            'Flappy Bird',
-                            style: TextStyle(fontSize: h/40, color: Colors.black),
-                           textAlign: TextAlign.center,
-                          ) )
-                          
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Flappy Bird',
+                                style: TextStyle(
+                                    fontSize: h / 40, color: Colors.black),
+                                textAlign: TextAlign.center,
+                              ))
                         ]),
                       ),
                     ),
@@ -82,13 +82,13 @@ class _GamesState extends State<Games> {
                 ),
                 Material(
                     color: Colors.white,
-                    child: SizedBox(height: h/10, width: w/2)),
+                    child: SizedBox(height: h / 10, width: w / 2)),
                 Flexible(
                   child: Container(
                     child: Material(
                       color: Colors.cyan,
                       //elevation: 8,
-                       
+
                       borderRadius: BorderRadius.circular(20),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: InkWell(
@@ -108,17 +108,17 @@ class _GamesState extends State<Games> {
                           children: [
                             Ink.image(
                               image: AssetImage('assets/images/fruit.jpg'),
-                              height: h/4.5,
-                              width: w/2.5,
+                              height: h / 4.5,
+                              width: w / 2.5,
                               fit: BoxFit.cover,
                             ),
                             SizedBox(
-                              height: h/35,
+                              height: h / 35,
                             ),
                             Text(
                               'Fruit Collection',
-                              style:
-                                  TextStyle(fontSize: h/40, color: Colors.black),
+                              style: TextStyle(
+                                  fontSize: h / 40, color: Colors.black),
                             )
                           ],
                         ),
@@ -133,7 +133,7 @@ class _GamesState extends State<Games> {
                 children: [
                   Material(
                       color: Colors.white,
-                      child: SizedBox(height: h/10, width: w/3)),
+                      child: SizedBox(height: h / 10, width: w / 3)),
                   Flexible(
                     child: Container(
                       child: Material(
@@ -153,7 +153,7 @@ class _GamesState extends State<Games> {
                   ),
                   Material(
                       color: Colors.white,
-                      child: SizedBox(height: h/5, width: w/3)),
+                      child: SizedBox(height: h / 5, width: w / 3)),
                   Flexible(
                       child: Container(
                           child: Material(
@@ -178,16 +178,17 @@ class _GamesState extends State<Games> {
                         children: [
                           Ink.image(
                             image: AssetImage('assets/images/dino.jpg'),
-                            height: h/4.5,
-                            width: w/2.5,
+                            height: h / 4.5,
+                            width: w / 2.5,
                             fit: BoxFit.cover,
                           ),
                           SizedBox(
-                            height: h/35,
+                            height: h / 35,
                           ),
                           Text(
                             'Dino Run',
-                            style: TextStyle(fontSize: h/40, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: h / 40, color: Colors.black),
                           )
                         ],
                       ),

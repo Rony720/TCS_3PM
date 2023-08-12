@@ -36,53 +36,11 @@ class _GamesUpperState extends State<GamesUpper> {
               Column(children: [
                 Material(
                     color: Colors.white,
-                    child: SizedBox(height: 100, width: 100)),
+                    child: SizedBox(height: h/10, width: w/2)),
                 Flexible(
                   child: Container(
                     child: Material(
-                      color: Colors.white,
-                      //elevation: 8,
-                      borderRadius: BorderRadius.circular(20),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: InkWell(
-                        splashColor: Colors.black26,
-                        onTap: () {
-                          main.changer.currentSelectedBodyPart = "HAND";
-                          main.changer.notify();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FlappyFaceDetect(),
-                            ),
-                          );
-                        },
-                        child:
-                            Column(mainAxisSize: MainAxisSize.min, children: [
-                          Ink.image(
-                            image: AssetImage('assets/images/flappy.jpg'),
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.cover,
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Text(
-                            'Flappy Bird',
-                            style: TextStyle(fontSize: 18, color: Colors.black),
-                          )
-                        ]),
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                    color: Colors.white,
-                    child: SizedBox(height: 100, width: 200)),
-                Flexible(
-                  child: Container(
-                    child: Material(
-                      color: Colors.white,
+                      color: Colors.cyan,
                       //elevation: 8,
                       borderRadius: BorderRadius.circular(20),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -98,22 +56,64 @@ class _GamesUpperState extends State<GamesUpper> {
                             ),
                           );
                         },
+                        child:
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                          Ink.image(
+                            image: AssetImage('assets/images/fruit.jpg'),
+                            height: h/4.5,
+                            width: w/2.5,
+                            fit: BoxFit.cover,
+                          ),
+                          SizedBox(
+                            height: h/35,
+                          ),
+                          Text(
+                            'Fruit Collection',
+                            style: TextStyle(fontSize: h/40, color: Colors.black),
+                          )
+                        ]),
+                      ),
+                    ),
+                  ),
+                ),
+                Material(
+                    color: Colors.white,
+                    child: SizedBox(height: h/10, width: w/2)),
+                Flexible(
+                  child: Container(
+                    child: Material(
+                      color: Colors.cyan,
+                      //elevation: 8,
+                      borderRadius: BorderRadius.circular(20),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: InkWell(
+                        splashColor: Colors.black26,
+                        onTap: () {
+                          main.changer.currentSelectedBodyPart = "HAND";
+                          main.changer.notify();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DinoRunFace(),
+                            ),
+                          );
+                        },
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Ink.image(
-                              image: AssetImage('assets/images/fruit.jpg'),
-                              height: 150,
-                              width: 150,
+                              image: AssetImage('assets/images/dino.jpg'),
+                              height: h/4.5,
+                              width: w/2.5,
                               fit: BoxFit.cover,
                             ),
                             SizedBox(
-                              height: 3,
+                              height: h/35,
                             ),
                             Text(
-                              'Fruit Collection',
+                              'Dino Run',
                               style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
+                                  TextStyle(fontSize: h/40, color: Colors.black),
                             )
                           ],
                         ),
@@ -128,7 +128,7 @@ class _GamesUpperState extends State<GamesUpper> {
                 children: [
                   Material(
                       color: Colors.white,
-                      child: SizedBox(height: 100, width: 100)),
+                      child: SizedBox(height: h/10, width: w/3)),
                   Flexible(
                     child: Container(
                       child: Material(
@@ -148,11 +148,11 @@ class _GamesUpperState extends State<GamesUpper> {
                   ),
                   Material(
                       color: Colors.white,
-                      child: SizedBox(height: 100, width: 100)),
+                      child: SizedBox(height: h/5, width: w/3)),
                   Flexible(
                       child: Container(
                           child: Material(
-                    color: Colors.white,
+                    color: Colors.cyan,
                     // elevation: 8,
                     borderRadius: BorderRadius.circular(20),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -164,7 +164,7 @@ class _GamesUpperState extends State<GamesUpper> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DinoRunFace(),
+                            builder: (context) => FlappyFaceDetect(),
                           ),
                         );
                       },
@@ -172,17 +172,17 @@ class _GamesUpperState extends State<GamesUpper> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Ink.image(
-                            image: AssetImage('assets/images/dino.jpg'),
-                            height: 150,
-                            width: 150,
+                            image: AssetImage('assets/images/flappy.jpg'),
+                            height: h/4.5,
+                            width: w/2.5,
                             fit: BoxFit.cover,
                           ),
                           SizedBox(
-                            height: 3,
+                            height: h/35,
                           ),
                           Text(
-                            'Dino Run',
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                            'Flappy Bird',
+                            style: TextStyle(fontSize: h/40, color: Colors.black),
                           )
                         ],
                       ),
