@@ -65,7 +65,7 @@ class DashboardPage extends StatelessWidget {
         children: [
           Container(
               alignment: Alignment.center,
-              margin: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+              margin: const EdgeInsets.fromLTRB(25, 100, 25, 10),
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Column(children: [
                 Container(
@@ -207,6 +207,7 @@ class DashboardPage extends StatelessWidget {
     ));
   }
 }
+
 /*import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -249,46 +250,6 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-<<<<<<< HEAD
-          child: Stack(
-            children: [
-              Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.fromLTRB(25, 10, 25, 10),
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: Column(children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          border: Border.all(width: 5, color: Colors.white),
-                          color: Colors.white,
-                          boxShadow: [
-                            const BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 20,
-                                offset: Offset(5, 5))
-                          ]),
-                      child: const Icon(
-                        Icons.person,
-                        size: 60,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      'Mr. Donald Trump',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              padding:
-=======
       child: Stack(
         children: [
           Container(
@@ -337,7 +298,6 @@ class DashboardPage extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           padding:
->>>>>>> 8dfae8aa022a14dce90d0d052de4d4bbff43d32a
                               const EdgeInsets.only(left: 8.0, bottom: 4.0),
                           alignment: Alignment.topLeft,
                         ),

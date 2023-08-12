@@ -107,7 +107,7 @@ class _LoginState extends State<Login> {
   }
 
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
       resizeToAvoidBottomInset: false,
@@ -118,7 +118,15 @@ class _LoginState extends State<Login> {
         backgroundColor: kPrimaryColor,
         child: const Icon(Icons.home),
       ),
-      body: SizedBox(
+      body: LayoutBuilder(
+        builder :(context,constraints)
+        {
+           final screenHeight = constraints.maxHeight;
+            final screenWidth = constraints.maxWidth;
+
+            final double paddingValue = screenWidth * 0.04;
+        
+      return SizedBox(
         // color: Colors.amber[100],
         width: double.infinity,
         height: double.infinity,
@@ -129,8 +137,8 @@ class _LoginState extends State<Login> {
               left: 0,
               child: Image.asset(
                 "assets/images/main_top.png",
-                width: 150,
-                height: 100,
+                width: screenWidth*0.3,
+                //height: 100,
               ),
             ),
             Positioned(
@@ -141,8 +149,9 @@ class _LoginState extends State<Login> {
                 width: 150,
               ),
             ),
-            SizedBox(
-              width: double.infinity,
+            Padding(
+              padding:EdgeInsets.only(left: paddingValue),
+            
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -155,16 +164,17 @@ class _LoginState extends State<Login> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  //nsH = screenHeight*0.1
+                   SizedBox(height: screenHeight * 0.09),
                   SvgPicture.asset(
                     'assets/icons/undraw_ninja_e-52-b.svg',
-                    width: 260,
+                    width: screenWidth*0.6,
                   ),
-                  const SizedBox(height: 40),
+                   SizedBox(height: screenHeight*0.06),
                   Container(
-                    width: 300,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    width: screenWidth*0.8,
+                   // padding:
+                       // const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(66),
                       color: kPrimaryLightColor,
@@ -195,11 +205,11 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                   SizedBox(height: screenHeight*0.02),
                   Container(
-                    width: 300,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    width: screenWidth * 0.8,
+                   // padding:
+                      //  const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(66),
                       color: kPrimaryLightColor,
@@ -241,9 +251,9 @@ class _LoginState extends State<Login> {
                           )),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                   SizedBox(height: screenHeight*0.05),
                   SizedBox(
-                    width: 300,
+                    width: screenWidth * 0.8,
                     child: ElevatedButton(
                       onPressed: signIn,
                       // onPressed: () {
@@ -308,7 +318,10 @@ class _LoginState extends State<Login> {
             ),
           ],
         ),
-      ),
-    ));
-  }
+      );
+        },
+    ),
+   ),
+  );
+}
 }

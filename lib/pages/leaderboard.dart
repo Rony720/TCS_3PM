@@ -211,8 +211,8 @@ class progressPage extends StatefulWidget {
 
 class _progressPageState extends State<progressPage> {
   @override
-  Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
+ Widget build(BuildContext context) {
+   double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -220,7 +220,7 @@ class _progressPageState extends State<progressPage> {
         backgroundColor: Colors.cyan,
       ),
        body: Padding(
-        padding: EdgeInsets.only(top: 50),
+        padding: EdgeInsets.only(top: 80),
        child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -228,10 +228,10 @@ class _progressPageState extends State<progressPage> {
 
             Image.asset(
               'assets/images/chart.png',
-              width:150,
-              height:150,
+              width: w * 200 ,
+             height: h*0.2,
             ),
-            SizedBox(height:20),
+            SizedBox(height:h*0.07),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/headchart');
@@ -240,9 +240,9 @@ class _progressPageState extends State<progressPage> {
                 padding: EdgeInsets.all(16),
                 textStyle: TextStyle(fontSize:20),
               ),
-              child: Text('Head Chart'),
+              child: Text(' Head Chart'),
             ),
-            SizedBox(height : 10),
+            SizedBox(height : h*0.02),
             ElevatedButton(
               onPressed: () {
                  Navigator.pushNamed(context, '/upperchart');
@@ -253,7 +253,7 @@ class _progressPageState extends State<progressPage> {
               ),
               child: Text('Upper Chart'),
             ),
-            SizedBox(height:10),
+            SizedBox(height:h*0.02),
             ElevatedButton(
               onPressed: () {
                  Navigator.pushNamed(context, '/lowerchart');

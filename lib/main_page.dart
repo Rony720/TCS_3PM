@@ -19,7 +19,7 @@ class MainPage extends StatelessWidget {
               return const HomeScreen();
             } else {
               debugPrint("Inside main_page, user data not available");
-              return const Welcome();
+              return  Welcome();
             }
           }),
     );

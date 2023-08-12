@@ -40,7 +40,7 @@ class _GamesState extends State<Games> {
                 Flexible(
                   child: Container(
                     child: Material(
-                      color: Colors.cyan,
+                      color: Colors.white,
                       //elevation: 8,
                       borderRadius: BorderRadius.circular(20),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -86,7 +86,7 @@ class _GamesState extends State<Games> {
                 Flexible(
                   child: Container(
                     child: Material(
-                      color: Colors.cyan,
+                      color: Colors.white,
                       //elevation: 8,
 
                       borderRadius: BorderRadius.circular(20),
@@ -137,7 +137,7 @@ class _GamesState extends State<Games> {
                   Flexible(
                     child: Container(
                       child: Material(
-                        color: Colors.cyan,
+                        color: Colors.white,
                         // elevation: 8,
                         borderRadius: BorderRadius.circular(20),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
