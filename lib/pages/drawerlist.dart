@@ -49,13 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("Physioplay"),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
+            color: Colors.cyan,
+            /*gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: <Color>[
+                color: Colors.cyan,)/*<Color>[
                   Color.fromARGB(255, 33, 150, 243),
                   Color(0xFF059362)
-                ]),
+                ]*/,*/
           ),
         ),
       ),
