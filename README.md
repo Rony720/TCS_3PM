@@ -16,14 +16,16 @@ The games are designed to help individuals recover from physical injuries, disab
 3. Google Firebase
 
 ### Flutter UI
+![dashboard](https://github.com/Rony720/TCS_3PM/assets/76899177/23d3dcc3-6d27-4a7f-8743-f22e42bb0b33)
 
+![login](https://github.com/Rony720/TCS_3PM/assets/76899177/bd37effc-0f46-4c81-aaea-d4152eb224e9)
 
-![dashboard](![quiz](https://github.com/Rony720/TCS_3PM/assets/76899177/2e4426fe-2432-4c9a-bbdd-47ba4ccb6c07)
-https://github.com/Rony720/TCS_3PM/assets/76899177/02e222a4-fbcc-44c4-9b2c-a6115d505c7c)
+![flappy](https://github.com/Rony720/TCS_3PM/assets/76899177/e39b9b36-7114-47bb-b3a2-57536a29a1d5)
 
-![login](htt![flappy](https://github.com/Rony720/TCS_3PM/assets/76899177/adfc24ef-88dc-466b-9712-01576ad3900![dino](https://github.com/Rony720/TCS_3PM/assets/76899177/5cc60036-b06e-4ec6-84fe-e4c2eaf7b58f)
-4)![fruit](https://github.com/Rony720/TCS_3PM/assets/76899177/e963e2b4-e292-4e06-a035-3db617360674)
+![fruit](https://github.com/Rony720/TCS_3PM/assets/76899177/6ae1b6c3-d134-4448-9d35-68715a2109b2)
 
-ps://github.com/Rony720/TCS_3PM/assets/76899177/786d413d-0112-420f-8a9a-0961596d1513)
+![dino](https://github.com/Rony720/TCS_3PM/assets/76899177/d528e0a6-2f98-4a8c-b0bc-a0092a2ced0f)
+
+![quiz](https://github.com/Rony720/TCS_3PM/assets/76899177/b7bb1aad-4f5f-4124-b9db-4c3eacc74400)
 
 
