@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import '../game/fruitcollection.dart';
 import 'fruit_component.dart';
@@ -18,7 +18,7 @@ class BoyComponent extends SpriteComponent
     x = gameRef.size[0] * 0.4;
     y = gameRef.size[1] / 1.3;
 
-    add(RectangleHitbox());
+    add(CircleHitbox());
   }
 
   @override
@@ -31,6 +31,7 @@ class BoyComponent extends SpriteComponent
     super.onCollision(intersectionPoints, other);
     if (other is FruitComponent) {
       print("HIT");
+      FlameAudio.play('fruitCollected.mpeg');
       gameRef.fruitCollected += 1;
       gameRef.remove(other);
     }

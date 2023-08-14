@@ -1,13 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_page/dino/dino_game_main.dart';
+import 'package:flutter_auth_page/main.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../../pages/pickgame_head.dart';
-import '../widgets/hud.dart';
 import '../game/dino_run.dart';
-import '../widgets/main_menu.dart';
 import '../models/player_data.dart';
 import '../game/audio_manager.dart';
 
@@ -68,9 +65,11 @@ class GameOverMenu extends StatelessWidget {
                       onPressed: () {
                         Get.back();
                         gameRef.overlays.remove(GameOverMenu.id);
-                        gameRef.resumeEngine();
+                        // gameRef.resumeEngine();
                         gameRef.reset(true);
                         AudioManager.instance.resumeBgm();
+                        changer.isGamePaused = false;
+                        changer.notify();
                       },
                     ),
                     ElevatedButton(

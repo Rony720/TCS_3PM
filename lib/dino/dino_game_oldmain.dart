@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/dino/widgets/instructiondino_head.dart';
 import 'package:flutter_auth_page/dino/widgets/instructiondino_lower.dart';
 import 'package:flutter_auth_page/dino/widgets/instructiondino_upper.dart';
+import 'package:flutter_auth_page/dino/widgets/sensitivity_selection.dart';
 import '../main.dart';
 import 'widgets/hud.dart';
 import 'game/dino_run.dart';
@@ -40,6 +41,7 @@ class DinoRunApp extends StatelessWidget {
           GameOverMenu.id: (_, DinoRun gameRef) => GameOverMenu(
                 gameRef,
               ),
+              
           SettingsMenu.id: (_, DinoRun gameRef) => SettingsMenu(gameRef),
           'InstructionDino': (_, DinoRun gameRef) {
             return changer.currentSelectedBodyPart == "HEAD"
@@ -47,6 +49,9 @@ class DinoRunApp extends StatelessWidget {
                 : changer.currentSelectedBodyPart == "HAND"
                     ? InstructionDinoHand(gameRef)
                     : InstructionDinoLeg(gameRef);
+          },
+          'Sensitivity': (_, DinoRun gameRef) {
+            return  SensitivityDino(gameRef: gameRef,);
           },
         },
         // By default MainMenu overlay will be active.

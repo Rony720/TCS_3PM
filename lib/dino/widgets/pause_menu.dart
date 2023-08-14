@@ -3,12 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../main.dart';
 import '../widgets/hud.dart';
 import '../game/dino_run.dart';
 import '../widgets/main_menu.dart';
 import '../game/audio_manager.dart';
 import '../models/player_data.dart';
-import 'game_over_menu.dart';
 
 // This represents the pause menu overlay.
 class PauseMenu extends StatelessWidget {
@@ -58,7 +58,10 @@ class PauseMenu extends StatelessWidget {
                       onPressed: () {
                         gameRef.overlays.remove(PauseMenu.id);
                         gameRef.overlays.add(Hud.id);
-                        gameRef.resumeEngine();
+                        // gameRef.resumeEngine();
+                        changer.isGamePaused = false;
+                        changer.isPauseMenu = false;
+                        changer.notify();
                         AudioManager.instance.resumeBgm();
                       },
                       child: const Text(
@@ -72,7 +75,10 @@ class PauseMenu extends StatelessWidget {
                       onPressed: () {
                         gameRef.overlays.remove(PauseMenu.id);
                         gameRef.overlays.add(Hud.id);
-                        gameRef.resumeEngine();
+                        // gameRef.resumeEngine();
+                        changer.isGamePaused = false;
+                        changer.isPauseMenu = false;
+                        changer.notify();
                         gameRef.reset(false);
                         gameRef.startGamePlay();
                         AudioManager.instance.resumeBgm();
@@ -92,7 +98,9 @@ class PauseMenu extends StatelessWidget {
                         );
                         gameRef.overlays.remove(PauseMenu.id);
                         gameRef.overlays.add(MainMenu.id);
-                        gameRef.resumeEngine();
+                        // gameRef.resumeEngine();
+                        changer.isGamePaused = false;
+                        changer.notify();
                         gameRef.reset(false);
                         AudioManager.instance.pauseBgm();
                       },

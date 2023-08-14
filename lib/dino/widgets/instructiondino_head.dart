@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
 import '../widgets/hud.dart';
 import '../game/dino_run.dart';
-
 
 // This represents the main menu overlay.
 class InstructionDinoHead extends StatelessWidget {
@@ -51,9 +51,12 @@ class InstructionDinoHead extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      gameRef.startGamePlay();
+                      // gameRef.startGamePlay();
                       gameRef.overlays.remove('InstructionDino');
-                      gameRef.overlays.add(Hud.id);
+                      gameRef.overlays.add('Sensitivity');
+                      // gameRef.overlays.add(Hud.id);
+                      // changer.isGamePaused = false;
+                      // changer.notify();
                     },
                     child: const Text(
                       'Continue',

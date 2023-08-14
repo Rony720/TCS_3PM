@@ -67,9 +67,8 @@ class InstructionDinoLeg extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      gameRef.startGamePlay();
                       gameRef.overlays.remove('InstructionDino');
-                      gameRef.overlays.add(Hud.id);
+                      gameRef.overlays.add('Sensitivity');
                     },
                     child: const Text(
                       'Continue',

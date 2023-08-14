@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../main.dart';
 import '../game/fruitcollection.dart';
-
 
 class GameOverMenu extends StatelessWidget {
   final FruitCollection gameRef;
@@ -47,9 +47,10 @@ class GameOverMenu extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 7, 77, 255),
                         padding: EdgeInsets.all(12)),
-                    onPressed: ()  {
+                    onPressed: () {
                       gameRef.overlays.remove('GameOverMenu');
-                      gameRef.isGamePaused = false;
+                      changer.isGamePaused = false;
+                      changer.notify();
                       gameRef.reset(true);
                     },
                     child: const Text(
@@ -65,7 +66,8 @@ class GameOverMenu extends StatelessWidget {
                         backgroundColor: Colors.amber,
                         padding: EdgeInsets.all(12)),
                     onPressed: () {
-                      gameRef.isGamePaused = false;
+                      changer.isGamePaused = false;
+                      changer.notify();
                       gameRef.removeAllExit();
                       gameRef.reset(true);
                       Navigator.pop(context);

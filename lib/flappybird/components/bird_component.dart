@@ -58,13 +58,6 @@ class BirdComponent extends SpriteGroupComponent<BirdWingsState>
 
     if (changer.sensitivity == 0) {
       gameRef.children.forEach((child) {
-        // if (child is ToptubeComponent) {
-        //   if (position.y < (child.y * 1.1)) // 10 percent
-        //   {
-        //     position.y += 1.5;
-        //   }
-        // }
-
         if (child is BottomtubeComponent) {
           if (position.y < (child.y * 0.99) &&
               child.isPassed == false) // .99 makes hit

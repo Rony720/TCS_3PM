@@ -63,7 +63,6 @@ class InstructionFlappyLeg extends StatelessWidget {
                         padding: EdgeInsets.all(12)),
                     onPressed: () {
                       gameRef.overlays.remove('InstructionFlappy');
-
                       gameRef.overlays.add('Sensitivity');
                     },
                     child: const Text(

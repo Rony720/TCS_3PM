@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
 import '../game/fruitcollection.dart';
 
 class InstructionFruit extends StatelessWidget {
@@ -46,8 +47,11 @@ class InstructionFruit extends StatelessWidget {
                         backgroundColor: Colors.amber,
                         padding: EdgeInsets.all(12)),
                     onPressed: () {
-                      gameRef.isGamePaused = false;
+                      // changer.isGamePaused = false;
+                      // changer.notify();
+
                       gameRef.overlays.remove('InstructionFruit');
+                      gameRef.overlays.add('Sensitivity');
                     },
                     child: const Text(
                       'Continue',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../main.dart';
 import '../game/dino_run.dart';
 import '../game/audio_manager.dart';
 import '../models/player_data.dart';
@@ -54,8 +55,11 @@ class Hud extends StatelessWidget {
               onPressed: () {
                 gameRef.overlays.remove(Hud.id);
                 gameRef.overlays.add(PauseMenu.id);
-                gameRef.pauseEngine();
                 AudioManager.instance.pauseBgm();
+                // gameRef.pauseEngine();
+                changer.isGamePaused = true;
+                changer.isPauseMenu = true;
+                changer.notify();
               },
               child: const Icon(Icons.pause, color: Colors.white),
             ),

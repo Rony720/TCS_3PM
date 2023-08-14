@@ -143,7 +143,11 @@ class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
     add(PauseButton());
 
     // Load audio
-    FlameAudio.audioCache.loadAll(['flappySound.mp3', 'flappyReward.mpeg']);
+    FlameAudio.bgm.initialize();
+    FlameAudio.audioCache.loadAll(
+        ['flappySound.mp3', 'flappyReward.mpeg', 'flappyBackground.mp3']);
+
+    FlameAudio.bgm.play('flappyBackground.mp3');
 
     // Background
     add(BackgroundComponent());

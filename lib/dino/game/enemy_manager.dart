@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
+import 'package:flutter_auth_page/main.dart';
 
 import '../game/enemy.dart';
 import '../game/dino_run.dart';
@@ -16,7 +17,7 @@ class EnemyManager extends Component with HasGameRef<DinoRun> {
   final Random _random = Random();
 
   // Timer to decide when to spawn next enemy.
-  final Timer _timer = Timer(2, repeat: true);
+  final Timer _timer = Timer(3.5, repeat: true);
 
   EnemyManager() {
     _timer.onTick = spawnRandomEnemy;
@@ -63,23 +64,23 @@ class EnemyManager extends Component with HasGameRef<DinoRun> {
           nFrames: 16,
           stepTime: 0.1,
           textureSize: Vector2(36, 30),
-          speedX: 40,
+          speedX: 80, // 80
           canFly: false,
         ),
-        EnemyData(
-          image: gameRef.images.fromCache('Bat/Flying (46x30).png'),
-          nFrames: 7,
-          stepTime: 0.1,
-          textureSize: Vector2(46, 30),
-          speedX: 50,
-          canFly: true,
-        ),
+        // EnemyData(
+        //   image: gameRef.images.fromCache('Bat/Flying (46x30).png'),
+        //   nFrames: 7,
+        //   stepTime: 0.1,
+        //   textureSize: Vector2(46, 30),
+        //   speedX: 50,
+        //   canFly: true,
+        // ),
         EnemyData(
           image: gameRef.images.fromCache('Rino/Run (52x34).png'),
           nFrames: 6,
           stepTime: 0.09,
           textureSize: Vector2(52, 34),
-          speedX: 75,
+          speedX: 150, // 150
           canFly: false,
         ),
       ]);
@@ -90,6 +91,8 @@ class EnemyManager extends Component with HasGameRef<DinoRun> {
 
   @override
   void update(double dt) {
+    if (changer.isGamePaused == true) return;
+
     _timer.update(dt);
     super.update(dt);
   }

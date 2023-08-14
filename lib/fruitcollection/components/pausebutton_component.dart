@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/flame.dart';
+import 'package:flutter_auth_page/main.dart';
 
 import '../game/fruitcollection.dart';
 
@@ -19,8 +19,9 @@ class PauseButton extends SpriteComponent
   @override
   bool onTapDown(TapDownInfo info) {
     try {
-      if (!gameRef.isGamePaused) {
-        gameRef.isGamePaused = true;
+      if (!changer.isGamePaused) {
+        changer.isGamePaused = true;
+        changer.notify();
         gameRef.overlays.add('PauseMenu');
       }
       return super.onTapDown(info);

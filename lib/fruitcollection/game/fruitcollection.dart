@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/API/users.dart';
@@ -16,9 +15,7 @@ import '../components/fruit_component.dart';
 import '../components/pausebutton_component.dart';
 import '../../API/base_client.dart';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 late BoyComponent boy;
 
@@ -120,7 +117,6 @@ class FruitCollection extends FlameGame
   late SpriteAnimationComponent boyWalking;
   late int fruitCollected;
   late int fruitMissed;
-  bool isGamePaused = true;
   String email = "";
 
   Future fetch_user_email() async {
@@ -152,6 +148,11 @@ class FruitCollection extends FlameGame
   FutureOr<void> onLoad() async {
     await super.onLoad();
 
+    changer.isGamePaused = true;
+    changer.isPauseMenu = false;
+    changer.sensitivity = -1;
+    changer.notify();
+
     // Set Selected Game as FRUIT
     changer.currentSelectedGame = "FRUIT";
     changer.notify();
@@ -178,7 +179,7 @@ class FruitCollection extends FlameGame
         period: 5,
         repeat: true,
         onTick: () async {
-          if (!isGamePaused) {
+          if (!changer.isGamePaused) {
             // random number
             var random = Random();
             var positionIndex = random.nextInt(3);
@@ -192,13 +193,14 @@ class FruitCollection extends FlameGame
     // Text Component for score
     TextPaint scoreText = TextPaint(
       style: const TextStyle(
-          color: Color.fromARGB(255, 72, 33, 243),
-          fontSize: 20,
-          fontWeight: FontWeight.bold),
+          color: Color.fromARGB(255, 255, 255, 255),
+          fontSize: 25,
+          fontWeight: FontWeight.w900,
+          fontFamily: "RubikMicrobe"),
     );
 
     scoreComponent = TextComponent(
-        text: "SCORE :$fruitCollected",
+        text: "⭐️ ${fruitCollected}",
         position: Vector2(size[0] * .03, size[1] * .1),
         textRenderer: scoreText);
 
@@ -209,12 +211,12 @@ class FruitCollection extends FlameGame
     TextPaint remainingLifeText = TextPaint(
       style: const TextStyle(
           color: Color.fromARGB(255, 243, 33, 33),
-          fontSize: 30,
+          fontSize: 20,
           fontWeight: FontWeight.bold),
     );
     remainingLifeComponent = TextComponent(
-        text: "LIFE :${5 - fruitMissed}",
-        position: Vector2(size[0] * .35, size[1] * .2),
+        text: "🍊" * (5 - fruitMissed),
+        position: Vector2(size[0] * .05, size[1] * .2),
         textRenderer: remainingLifeText);
 
     add(remainingLifeComponent);
@@ -234,6 +236,12 @@ class FruitCollection extends FlameGame
 
     // Pause Button
     add(PauseButton());
+
+    // Load Sound
+    FlameAudio.bgm.initialize();
+    FlameAudio.audioCache.loadAll(
+        ['fruitBackground.mp3', 'fruitCollected.mpeg', 'fruitMissed.mpeg']);
+    FlameAudio.bgm.play('fruitBackground.mp3');
     // overlay
     overlays.add('StartMenu');
   }
@@ -242,16 +250,16 @@ class FruitCollection extends FlameGame
   void update(double dt) async {
     super.update(dt);
 
-    // End Game
-    if (isGamePaused) return;
-
     // update score
-    final newScore = "SCORE :${fruitCollected}";
+    final newScore = "⭐️ ${fruitCollected}";
     scoreComponent.text = newScore;
+
+    // End Game
+    if (changer.isGamePaused) return;
 
     // update remaining life
 
-    final newLife = "LIFE :${5 - fruitMissed}";
+    final newLife = "🍊" * (5 - fruitMissed);
     remainingLifeComponent.text = newLife;
 
     // To remove boy character
@@ -335,6 +343,11 @@ class FruitCollection extends FlameGame
 
   void reset(bool should_update_firestore) async {
     print("reset called");
+    fruitCollected = 0;
+    fruitMissed = 0;
+    children.forEach((child) {
+      if (child is FruitComponent) remove(child);
+    });
 
     String user_email = await fetch_user_email() as String;
     Firebase_score score = Firebase_score(
@@ -349,33 +362,22 @@ class FruitCollection extends FlameGame
     Fields fields = Fields(user, score, datee);
     Score outer_score = Score(fields);
     if (should_update_firestore) {
-          if (changer.currentSelectedBodyPart == "HEAD") {
-               var response = await MyBaseClient().post(
-               'head',
-               "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/HFruit/",
-                outer_score);
-      }
-
-      else if (changer.currentSelectedBodyPart == "LEG") {
+      if (changer.currentSelectedBodyPart == "HEAD") {
+        var response = await MyBaseClient().post(
+            'head',
+            "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/HFruit/",
+            outer_score);
+      } else if (changer.currentSelectedBodyPart == "LEG") {
         var response = await MyBaseClient().post(
             'leg',
             "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/LFruit/",
             outer_score);
-      }
-
-      else if (changer.currentSelectedBodyPart == "HAND") {
+      } else if (changer.currentSelectedBodyPart == "HAND") {
         var response = await MyBaseClient().post(
             'hand',
             "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/UFruit/",
             outer_score);
         // Remove all components
-        fruitCollected = 0;
-        fruitMissed = 0;
-        children.forEach((child) {
-          if (child is FruitComponent) remove(child);
-        });
-
-        // Add the inital tubes
       }
     }
   }

@@ -55,7 +55,10 @@ class _PoseDetectorViewHandState extends State<PoseDetectorViewHand> {
     // printing left eye y coordinate
     for (Pose pose in poses) {
       // FLAPPY
-      if (changer.currentSelectedGame == "FLAPPY") {
+      if (!changer.isPauseMenu &&
+          changer.currentSelectedGame == "FLAPPY" &&
+          ((changer.sensitivity == 1) ||
+              (changer.sensitivity == 0 && changer.isGamePaused == true))) {
         // to access specific landmarks  [ we need Shoulder]
         final rShoulder = pose.landmarks[PoseLandmarkType.rightShoulder];
         final lShoulder = pose.landmarks[PoseLandmarkType.leftShoulder];
@@ -85,6 +88,11 @@ class _PoseDetectorViewHandState extends State<PoseDetectorViewHand> {
                 changer.flappyleft = lShoulder.y;
               print("FLAPPY JUMPED");
 
+              if (changer.sensitivity == 0) {
+                changer.isGamePaused = false;
+                changer.notify();
+              }
+
               changer.notify();
             } else if (rShoulder.y.abs() > changer.flappyright.abs() ||
                 lShoulder.y.abs() > changer.flappyleft.abs()) {
@@ -100,7 +108,10 @@ class _PoseDetectorViewHandState extends State<PoseDetectorViewHand> {
       // FLAPPY END
 
       // DINO
-      if (changer.currentSelectedGame == "DINO") {
+      if (!changer.isPauseMenu &&
+          changer.currentSelectedGame == "DINO" &&
+          ((changer.sensitivity == 1) ||
+              (changer.sensitivity == 0 && changer.isGamePaused == true))) {
         // to access specific landmarks  [ we need wrist]
         final rightwrist = pose.landmarks[PoseLandmarkType.rightWrist];
         final leftwrist = pose.landmarks[PoseLandmarkType.leftWrist];
@@ -131,6 +142,11 @@ class _PoseDetectorViewHandState extends State<PoseDetectorViewHand> {
               changer.dinoWrist = dx_wrist;
               changer.notify();
               print("DINO JUMPED");
+
+              if (changer.sensitivity == 0) {
+                changer.isGamePaused = false;
+                changer.notify();
+              }
             } else if (changer.dinoWrist > dx_wrist) {
               changer.dinoWrist = dx_wrist;
               changer.notify();

@@ -33,7 +33,7 @@ class InstructionFlappyShoulder extends StatelessWidget {
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
-                  Text(
+                  const Text(
                     '1.Raise your left or right shoulder to jump.',
                     style: TextStyle(
                         fontSize: 20,
@@ -41,7 +41,7 @@ class InstructionFlappyShoulder extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                  Text(
+                  const Text(
                     '2. Keep your phone steady',
                     style: TextStyle(
                         fontSize: 20,
@@ -49,7 +49,7 @@ class InstructionFlappyShoulder extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                  Text(
+                  const Text(
                     '3.Make sure your shoulders are visible',
                     style: TextStyle(
                         fontSize: 20,

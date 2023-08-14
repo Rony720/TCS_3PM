@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_page/main.dart';
@@ -82,6 +83,7 @@ class PauseMenuFlappy extends StatelessWidget {
                       changer.notify();
                       gameRef.removeAllExit();
                       gameRef.reset(true);
+                      FlameAudio.bgm.dispose();
                       Navigator.pop(context);
                     },
                     child: const Text(

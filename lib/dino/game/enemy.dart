@@ -1,6 +1,7 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
+import '../../main.dart';
 import '../game/dino_run.dart';
 import '../models/enemy_data.dart';
 
@@ -9,6 +10,7 @@ class Enemy extends SpriteAnimationComponent
     with CollisionCallbacks, HasGameRef<DinoRun> {
   // The data required for creation of this enemy.
   final EnemyData enemyData;
+  bool isPassed = false;
 
   Enemy(this.enemyData) {
     animation = SpriteAnimation.fromFrameData(
@@ -40,6 +42,7 @@ class Enemy extends SpriteAnimationComponent
 
   @override
   void update(double dt) {
+    if (changer.isGamePaused == true) return;
     position.x -= enemyData.speedX * dt;
 
     // Remove the enemy and increase player score

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flutter_auth_page/main.dart';
 
 import '../game/enemy.dart';
 import '../game/dino_run.dart';
@@ -63,7 +64,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
   // Controlls how long the hit animations will be played.
   final Timer _hitTimer = Timer(1);
 
-  static const double gravity = 800;
+  static const double gravity = 700; // 800
 
   final PlayerData playerData;
 
@@ -99,6 +100,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
 
   @override
   void update(double dt) {
+    if (changer.isGamePaused == true) return;
     // v = u + at
     speedY += gravity * dt;
 
@@ -116,6 +118,17 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
     }
 
     _hitTimer.update(dt);
+    if (changer.sensitivity == 0) {
+      gameRef.children.forEach((child) {
+        if (child is Enemy && child.isPassed == false) {
+          if (child.position.x < 70) {
+            changer.isGamePaused = true;
+            changer.notify();
+            child.isPassed = true;
+          }
+        }
+      });
+    }
     super.update(dt);
   }
 

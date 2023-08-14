@@ -9,7 +9,6 @@ import 'package:flame/components.dart';
 import '../../API/base_client.dart';
 import '../../API/users.dart';
 import '../../main.dart';
-import '../dino_game_main.dart';
 import '../game/dino.dart';
 import '../widgets/hud.dart';
 import '../models/settings.dart';
@@ -18,7 +17,6 @@ import '../game/enemy_manager.dart';
 import '../models/player_data.dart';
 import '../widgets/pause_menu.dart';
 import '../widgets/game_over_menu.dart';
-
 
 class Score {
   // String? user;
@@ -127,8 +125,7 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
   late PlayerData playerData;
   late EnemyManager _enemyManager;
 
-
-   String email = "";
+  String email = "";
 
   Future fetch_user_email() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -158,6 +155,10 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
   // This method get called while flame is preparing this game.
   @override
   Future<void> onLoad() async {
+    changer.isGamePaused = true;
+    changer.isPauseMenu = false;
+    changer.sensitivity = -1;
+    changer.notify();
     // SET SELECTED GAME AS DINO
     changer.currentSelectedGame = "DINO";
     changer.notify();
@@ -171,7 +172,7 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
 
     // Start playing background music. Internally takes care
     // of checking user settings.
-    // AudioManager.instance.startBgm('8BitPlatformerLoop.wav');
+    AudioManager.instance.startBgm('8BitPlatformerLoop.wav');
 
     // Cache all the images.
     await images.loadAll(_imageAssets);
@@ -217,10 +218,18 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
 
   // This method reset the whole game world to initial state.
   void reset(bool should_update_firestore) async {
+    int firestoreScore = playerData.currentScore;
 
-     String user_email = await fetch_user_email() as String;
+    // First disconnect all actions from game world.
+    _disconnectActors();
+
+    // Reset player data to inital values.
+    playerData.currentScore = 0;
+    playerData.lives = 5;
+
+    String user_email = await fetch_user_email() as String;
     Firebase_score scoree = Firebase_score(
-      integerValue: playerData.currentScore,
+      integerValue: firestoreScore,
     );
     Dob user = Dob(
       stringValue: user_email,
@@ -248,23 +257,21 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
             outer_score);
       }
     }
-    // First disconnect all actions from game world.
-    _disconnectActors();
-
-    // Reset player data to inital values.
-    playerData.currentScore = 0;
-    playerData.lives = 5;
   }
 
   // This method gets called for each tick/frame of the game.
   @override
   void update(double dt) {
+    if (changer.isGamePaused == true) return;
+
     // If number of lives is 0 or less, game is over.
     if (playerData.lives <= 0) {
       overlays.add(GameOverMenu.id);
       overlays.remove(Hud.id);
-      pauseEngine();
+      // pauseEngine();
       AudioManager.instance.pauseBgm();
+      changer.isGamePaused = true;
+      changer.notify();
     }
     super.update(dt);
 
@@ -338,7 +345,9 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
         // resume the engine (lets the parallax effect play).
         if (!(overlays.isActive(PauseMenu.id)) &&
             !(overlays.isActive(GameOverMenu.id))) {
-          resumeEngine();
+          // resumeEngine();
+          changer.isGamePaused = false;
+          changer.notify();
         }
         break;
       case AppLifecycleState.paused:
@@ -350,7 +359,9 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
           overlays.remove(Hud.id);
           overlays.add(PauseMenu.id);
         }
-        pauseEngine();
+        // pauseEngine();
+        changer.isGamePaused = true;
+        changer.notify();
         break;
     }
     super.lifecycleStateChange(state);

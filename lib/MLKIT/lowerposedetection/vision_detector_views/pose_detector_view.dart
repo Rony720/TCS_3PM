@@ -61,7 +61,10 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
     // printing left eye y coordinate
     for (Pose pose in poses) {
       // FLAPPY
-      if (changer.currentSelectedGame == "FLAPPY") {
+      if (!changer.isPauseMenu &&
+          changer.currentSelectedGame == "FLAPPY" &&
+          ((changer.sensitivity == 1) ||
+              (changer.sensitivity == 0 && changer.isGamePaused == true))) {
         // to access specific landmarks  [ we need hip,knee,ankle]
         final leftHipPoint = pose.landmarks[PoseLandmarkType.leftHip];
         final leftKneePoint = pose.landmarks[PoseLandmarkType.leftKnee];
@@ -97,6 +100,11 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
               changer.isFlappyUp = true;
               changer.notify();
 
+              if (changer.sensitivity == 0) {
+                changer.isGamePaused = false;
+                changer.notify();
+              }
+
               // print("SQUAT");
             } else {
               changer.isFlappyUp = false;
@@ -121,7 +129,10 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       // FLAPPY END
 
       // DINO
-      if (changer.currentSelectedGame == "DINO") {
+      if (!changer.isPauseMenu &&
+          changer.currentSelectedGame == "DINO" &&
+          ((changer.sensitivity == 1) ||
+              (changer.sensitivity == 0 && changer.isGamePaused == true))) {
         final rightHipPoint = pose.landmarks[PoseLandmarkType.rightHip];
         final rightKneePoint = pose.landmarks[PoseLandmarkType.rightKnee];
         final rightAnklePoint = pose.landmarks[PoseLandmarkType.rightAnkle];
@@ -155,6 +166,11 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
               squatno++;
               changer.isDinoJump = true;
               changer.notify();
+
+              if (changer.sensitivity == 0) {
+                changer.isGamePaused = false;
+                changer.notify();
+              }
 
               // print("SQUAT");
             } else {
