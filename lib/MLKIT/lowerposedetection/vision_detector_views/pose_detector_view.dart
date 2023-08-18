@@ -193,6 +193,68 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
           print("No of squats : $squatno");
         }
       }
+      print(changer.currentSelectedGame);
+      print(changer.currentSelectedGame);
+      print(changer.currentSelectedGame);
+      if (changer.currentSelectedGame == "QUIZ") {
+        print("INSIDE ");
+        print("INSIDE ");
+        print("INSIDE ");
+        print("INSIDE ");
+        print("INSIDE ");
+        print("INSIDE ");
+        // to access specific landmarks  [ we need hip,knee,ankle]
+        final rightHipPoint = pose.landmarks[PoseLandmarkType.rightHip];
+        final rightKneePoint = pose.landmarks[PoseLandmarkType.rightKnee];
+        final rightAnklePoint = pose.landmarks[PoseLandmarkType.rightAnkle];
+
+        if (rightHipPoint != null &&
+            rightKneePoint != null &&
+            rightAnklePoint != null) {
+          // slope of hip and knee
+          double slopeA = (rightHipPoint.y - rightKneePoint.y) /
+              (rightHipPoint.x - rightKneePoint.x);
+
+          double slopeB = (rightAnklePoint.y - rightKneePoint.y) /
+              (rightAnklePoint.x - rightKneePoint.x);
+
+          double angle = atan((slopeB - slopeA) / (1 + slopeA * slopeB));
+
+          // convert angle to radian
+
+          double degree = angle * 180 / pi;
+
+          standing = changer.poseStanding = 0;
+          changer.positionCapture = true;
+          changer.notify();
+
+          // check squat
+
+          if (changer.positionCapture && !squat) {
+            print("CURRENT ANGLE: ${degree.abs()}");
+            if ((degree.abs() - changer.poseStanding.abs() > 40)) {
+              squat = true;
+              squatno++;
+              changer.selectedOpt_quiz = (changer.selectedOpt_quiz + 1) % 4;
+              changer.notify();
+
+              // print("SQUAT");
+            }
+          }
+
+          // check for standing
+
+          if (changer.positionCapture && squat) {
+            print("CURRENT ANGLE: ${degree.abs()}");
+            if ((degree.abs() - changer.poseStanding.abs() < 20)) {
+              squat = false;
+              // print("STAND");
+            }
+          }
+
+          print("No of squats : $squatno");
+        }
+      }
     }
 
     if (inputImage.inputImageData?.size != null &&

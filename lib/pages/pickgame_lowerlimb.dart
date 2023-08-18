@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_auth_page/screen_quiz/welcome/instruction_page.dart';
 
 import '../dino/dino_game_main.dart';
 import '../flappybird/game/flappy_main.dart';
 import '../fruitcollection/game/fruitcollection_main.dart';
 import '../main.dart' as main;
-import '../quiz_notimer/screens/main_menu.dart';
 
 // ignore: camel_case_types
 class GamesLower extends StatefulWidget {
@@ -96,11 +96,12 @@ class _GamesLowerState extends State<GamesLower> {
                         splashColor: Colors.black26,
                         onTap: () {
                           main.changer.currentSelectedBodyPart = "LEG";
+                          main.changer.currentSelectedGame = "QUIZ";
                           main.changer.notify();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const MainMenu(),
+                              builder: (context) => InstructionPage(),
                             ),
                           );
                         },

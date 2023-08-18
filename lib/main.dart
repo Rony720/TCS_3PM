@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/pages/login.dart';
 import 'package:flutter_auth_page/pages/signup.dart';
 import 'package:flutter_auth_page/pages/welcome.dart';
-import 'package:flutter_auth_page/quiz_notimer/model/question_model.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -17,8 +17,7 @@ import 'package:flutter_auth_page/pages/upperprogress.dart';
 import 'dino/dino_game_main.dart' as dinoHead;
 import 'firebase_options.dart';
 import 'main_page.dart';
-import './quiz_notimer/data/questions_example.dart';
-import './quiz_notimer/screens/main_menu.dart';
+import 'screen_quiz/models/Questions.dart';
 
 List<CameraDescription> cameras = [];
 final Changer changer = Changer();
@@ -118,8 +117,9 @@ class Changer extends ChangeNotifier {
   int currentSelectedOption = 0;
   bool positionCapture = true;
   bool confirmAnswer = false;
+  int selectedOpt_quiz = -1;
 
-  late QuestionModel myQuestion;
+  late Question myQuestion;
 
   // QUIZ END
 
