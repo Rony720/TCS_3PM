@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/main.dart';
 import 'package:get/get.dart';
@@ -80,6 +81,7 @@ class GameOverMenu extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
+                        FlameAudio.bgm.dispose();
                         gameRef.overlays.remove(GameOverMenu.id);
                         gameRef.reset(true);
                         Navigator.pop(

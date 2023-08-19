@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -102,7 +103,7 @@ class PauseMenu extends StatelessWidget {
                         changer.isGamePaused = false;
                         changer.notify();
                         gameRef.reset(false);
-                        AudioManager.instance.pauseBgm();
+                        FlameAudio.bgm.dispose();
                       },
                       child: const Text(
                         'Exit',
