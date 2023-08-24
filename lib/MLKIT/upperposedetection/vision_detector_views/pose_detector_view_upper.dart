@@ -118,28 +118,32 @@ class _PoseDetectorViewHandState extends State<PoseDetectorViewHand> {
 
         if (rightwrist != null && leftwrist != null) {
           //finding horizontal distance between the right and left wrist
+          // var right = rightwrist.z;
+          // var Left = leftwrist.z;
+          //print("right $right");
+          //print("left $Left");
           double dx_wrist = rightwrist.x.abs() - leftwrist.x.abs();
 
           // Store value of first frame
           if (!changer.position) {
             changer.position = true;
-            changer.dinoWrist = dx_wrist;
+            changer.dinoWrist = dx_wrist.abs();
             changer.notify();
           }
 
           print(changer.dinoWrist);
-          print(dx_wrist);
+          print(dx_wrist.abs());
 
-          changer.isDinoUp = false;
+          changer.isDinoJump = false;
           changer.notify();
           //for the remaining frames, relative to initial wrist
           if (changer.position) {
-            if (dx_wrist - changer.dinoWrist > 30) {
+            if (dx_wrist.abs() - changer.dinoWrist > 50) {
               print("Wrsit gap widened");
-              changer.isDinoUp = true;
+              changer.isDinoJump = true;
               changer.notify();
               // New
-              changer.dinoWrist = dx_wrist;
+              changer.dinoWrist = dx_wrist.abs();
               changer.notify();
               print("DINO JUMPED");
 
@@ -147,8 +151,8 @@ class _PoseDetectorViewHandState extends State<PoseDetectorViewHand> {
                 changer.isGamePaused = false;
                 changer.notify();
               }
-            } else if (changer.dinoWrist > dx_wrist) {
-              changer.dinoWrist = dx_wrist;
+            } else if (changer.dinoWrist > dx_wrist.abs()) {
+              changer.dinoWrist = dx_wrist.abs();
               changer.notify();
             }
           }
@@ -176,17 +180,18 @@ class _PoseDetectorViewHandState extends State<PoseDetectorViewHand> {
         if (rangle != null && langle != null) {
           if (changer.frame) {
             changer.frame = false;
-            changer.fruitright = rangle;
-            changer.fruitleft = langle;
+            changer.fruitright = rangle.abs();
+            changer.fruitleft = langle.abs();
             changer.notify();
           }
-
+          print("right $rangle \n");
+          print("left $langle \n");
           if (!changer.frame) {
-            if (rangle > changer.fruitright && rangle > 35) {
+            if (rangle.abs() > changer.fruitright && rangle.abs() > 35) {
               print("Right Arm up");
               rightControl();
               print("BOY MOVED RIGHT");
-            } else if (langle < changer.fruitleft && langle > 35) {
+            } else if (langle > changer.fruitleft && langle > 35) {
               print("Left Arm up");
               leftControl();
               print("BOY MOVED LEFT");

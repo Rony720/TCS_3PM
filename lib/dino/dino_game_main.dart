@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_auth_page/MLKIT/upperposedetection/vision_detector_views/detector_views.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,7 +10,6 @@ import '../main.dart';
 import 'dino_game_oldmain.dart';
 import 'models/settings.dart';
 import 'models/player_data.dart';
-
 
 class DinoRunFace extends StatelessWidget {
   // BuildContext rootContext;
@@ -30,7 +30,9 @@ class DinoRunFace extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.40,
           child: changer.currentSelectedBodyPart == "HEAD"
               ? FaceDetectorView()
-              : const PoseDetectorView(),
+              : changer.currentSelectedBodyPart == 'HAND'
+                  ? const PoseDetectorViewHand()
+                  : const PoseDetectorView(),
         ),
       ],
     ));
