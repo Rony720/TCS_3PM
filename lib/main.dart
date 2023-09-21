@@ -2,14 +2,11 @@ import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_auth_page/pages/login.dart';
 import 'package:flutter_auth_page/pages/signup.dart';
-import 'package:flutter_auth_page/pages/welcome.dart';
-import 'package:flutter_auth_page/quiz_notimer/model/question_model.dart';
+
 import 'package:get/get.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter_auth_page/pages/headprogress.dart';
 import 'package:flutter_auth_page/pages/lowerprogress.dart';
 import 'package:flutter_auth_page/pages/upperprogress.dart';
@@ -17,8 +14,7 @@ import 'package:flutter_auth_page/pages/upperprogress.dart';
 import 'dino/dino_game_main.dart' as dinoHead;
 import 'firebase_options.dart';
 import 'main_page.dart';
-import './quiz_notimer/data/questions_example.dart';
-import './quiz_notimer/screens/main_menu.dart';
+import 'screen_quiz/models/Questions.dart';
 
 List<CameraDescription> cameras = [];
 final Changer changer = Changer();
@@ -41,6 +37,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(750, 1334)); // Set your design reference size
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -53,9 +51,11 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MainPage(),
         '/login': (context) => const Login(),
         '/signup': (context) => const Signup(),
-        '/headchart': (context) => const HeadChart(),
-        '/lowerchart': (context) => const LowerChart(),
-        '/upperchart': (context) => const UpperChart(),
+        '/headchart': (context) => const HeadProgress(isShowingMainData: true),
+        '/lowerchart': (context) =>
+            const LowerProgress(isShowingMainData: true),
+        '/upperchart': (context) =>
+            const UpperProgress(isShowingMainData: true),
       },
     );
   }
@@ -102,6 +102,7 @@ class Changer extends ChangeNotifier {
     'HAND': "DinoRunHand"
   };
 
+  bool isDinoUp = false;
   late double dinoWrist;
   bool position = false;
   // DINO ENDS
@@ -117,8 +118,9 @@ class Changer extends ChangeNotifier {
   int currentSelectedOption = 0;
   bool positionCapture = true;
   bool confirmAnswer = false;
+  int selectedOpt_quiz = -1;
 
-  late QuestionModel myQuestion;
+  late Question myQuestion;
 
   // QUIZ END
 
