@@ -11,6 +11,7 @@ import 'dino_game_oldmain.dart';
 import 'models/settings.dart';
 import 'models/player_data.dart';
 
+// Widget for running the Dino game with facial detection
 class DinoRunFace extends StatelessWidget {
   // BuildContext rootContext;
   const DinoRunFace({super.key});

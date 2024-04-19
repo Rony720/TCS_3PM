@@ -7,6 +7,7 @@ import 'package:flutter_auth_page/screen_quiz/models/Questions.dart';
 import '../../../constants.dart';
 import 'option.dart';
 
+// Define the question card widget for displaying quiz questions.
 class QuestionCard extends StatelessWidget {
   const QuestionCard({
     Key? key,

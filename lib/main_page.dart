@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/pages/drawerlist.dart';
 import 'package:flutter_auth_page/pages/welcome.dart';
 
+// Define the main page widget
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
@@ -19,7 +20,7 @@ class MainPage extends StatelessWidget {
               return const HomeScreen();
             } else {
               debugPrint("Inside main_page, user data not available");
-              return  Welcome();
+              return Welcome();
             }
           }),
     );

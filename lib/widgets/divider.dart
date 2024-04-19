@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/constants.dart';
 
+// Define the divider widget.
 class OrDivider extends StatelessWidget {
   const OrDivider({super.key});
 

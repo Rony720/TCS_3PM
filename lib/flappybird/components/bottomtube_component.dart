@@ -6,6 +6,7 @@ import '../../main.dart';
 import '../game/flappy_bird.dart';
 
 // Total gap is 0.40
+// Class representing the bottom tube component in Flappy Bird
 class BottomtubeComponent extends SpriteComponent with HasGameRef<FlappyBird> {
   late double tubeHeight;
   late double tubeWidth;

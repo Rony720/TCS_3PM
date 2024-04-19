@@ -18,6 +18,7 @@ import '../models/player_data.dart';
 import '../widgets/pause_menu.dart';
 import '../widgets/game_over_menu.dart';
 
+// Class representing a score entry in Firestore
 class Score {
   // String? user;
   Fields? fields;
@@ -47,6 +48,7 @@ class Score {
       };
 }
 
+// Class representing fields within a Score entry
 class Fields {
   Dob? user;
   Firebase_score? score;
@@ -64,6 +66,7 @@ class Fields {
       {"user": user, "score": score, "date": date.toJson()};
 }
 
+// Class representing the score value (integer)
 class Firebase_score {
   int? integerValue;
 
@@ -79,7 +82,7 @@ class Firebase_score {
         "integerValue": integerValue,
       };
 }
-
+// Class representing the date and time (converted to string)
 class Firebase_date_time {
   DateTime dateTimeValue;
 
@@ -126,7 +129,7 @@ class DinoRun extends FlameGame with TapDetector, HasCollisionDetection {
   late EnemyManager _enemyManager;
 
   String email = "";
-
+    // Method to fetch user email
   Future fetch_user_email() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
 

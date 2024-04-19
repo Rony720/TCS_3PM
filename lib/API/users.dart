@@ -3,11 +3,11 @@
 //     final document = documentFromJson(jsonString);
 
 import 'dart:convert';
-
+// Function to parse a JSON string into a Document object
 Document documentFromJson(String str) => Document.fromJson(json.decode(str));
-
+// Function to convert a Document object back to a JSON string
 String documentToJson(Document data) => json.encode(data.toJson());
-
+// Class representing a top-level document in Firestore
 class Document {
     List<DocumentElement>? documents;
 
@@ -23,7 +23,7 @@ class Document {
         "documents": List<dynamic>.from(documents!.map((x) => x.toJson())),
     };
 }
-
+// Class representing a nested document element within the main document
 class DocumentElement {
     String? name;
     Fields? fields;
@@ -51,7 +51,7 @@ class DocumentElement {
         "updateTime": updateTime?.toIso8601String(),
     };
 }
-
+// Class representing the "Fields" section within a DocumentElement
 class Fields {
     Dob? dob;
     Dob? email;
@@ -87,7 +87,7 @@ class Fields {
         "username": username!.toJson(),
     };
 }
-
+// Class representing a field with a string value (e.g., dob, uid, etc.)
 class Dob {
     String? stringValue;
 
@@ -103,7 +103,7 @@ class Dob {
         "stringValue": stringValue,
     };
 }
-
+// Class representing a field with a integer value
 class Phone {
     String? integerValue;
 

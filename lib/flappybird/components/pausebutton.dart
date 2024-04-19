@@ -7,6 +7,7 @@ import 'package:flutter_auth_page/flappybird/game/flappy_bird.dart';
 
 import '../../main.dart';
 
+// Widget for displaying a pause button in the Flappy Bird game
 class PauseButton extends SpriteComponent
     with HasGameRef<FlappyBird>, Tappable {
   @override

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../main.dart';
 import '../game/fruitcollection.dart';
 
+// Defining InstructionFruit StatelessWidget
 class InstructionFruit extends StatelessWidget {
   final FruitCollection gameRef;
   const InstructionFruit({super.key, required this.gameRef});

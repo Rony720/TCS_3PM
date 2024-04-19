@@ -15,6 +15,7 @@ import 'package:flutter/foundation.dart'
 /// );
 /// ```
 class DefaultFirebaseOptions {
+  // Define a static getter method to retrieve the FirebaseOptions based on the current platform.
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;
@@ -43,6 +44,7 @@ class DefaultFirebaseOptions {
     }
   }
 
+  // Define FirebaseOptions for the web platform.
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBjsaPOL4GuM5iIo1YFM_z66tvrfmKm2Z8',
     appId: '1:259194176970:web:b3f089f97f223ab7887b33',
@@ -53,6 +55,7 @@ class DefaultFirebaseOptions {
     measurementId: 'G-SL0X55RJ3V',
   );
 
+  // Define FirebaseOptions for the Android platform.
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAidKMbqcFyMqFil4wpUEWwbDNL3udBzLc',
     appId: '1:259194176970:android:2e2db381c7cc8e53887b33',
@@ -61,23 +64,27 @@ class DefaultFirebaseOptions {
     storageBucket: 'physioplay-9e057.appspot.com',
   );
 
+// Define FirebaseOptions for the iOS platform.
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAIljH1J3uFR-NY-l2DcWChX_CiYYXVhd4',
     appId: '1:259194176970:ios:151f9edb87fd8c9d887b33',
     messagingSenderId: '259194176970',
     projectId: 'physioplay-9e057',
     storageBucket: 'physioplay-9e057.appspot.com',
-    iosClientId: '259194176970-kc1dgt557ds190na3u4j0msvf6qtjrbv.apps.googleusercontent.com',
+    iosClientId:
+        '259194176970-kc1dgt557ds190na3u4j0msvf6qtjrbv.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterAuthPage',
   );
 
+  // Define FirebaseOptions for the macOS platform.
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAIljH1J3uFR-NY-l2DcWChX_CiYYXVhd4',
     appId: '1:259194176970:ios:151f9edb87fd8c9d887b33',
     messagingSenderId: '259194176970',
     projectId: 'physioplay-9e057',
     storageBucket: 'physioplay-9e057.appspot.com',
-    iosClientId: '259194176970-kc1dgt557ds190na3u4j0msvf6qtjrbv.apps.googleusercontent.com',
+    iosClientId:
+        '259194176970-kc1dgt557ds190na3u4j0msvf6qtjrbv.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterAuthPage',
   );
 }

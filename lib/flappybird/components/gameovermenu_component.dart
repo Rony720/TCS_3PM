@@ -6,6 +6,7 @@ import 'package:flutter_auth_page/main.dart';
 
 import '../game/flappy_bird.dart';
 
+// Widget for the game over menu
 class GameOverMenu extends StatelessWidget {
   final FlappyBird gameRef;
   const GameOverMenu({super.key, required this.gameRef});

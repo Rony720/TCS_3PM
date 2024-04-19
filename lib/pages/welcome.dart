@@ -5,7 +5,7 @@ import 'package:flutter_auth_page/constants.dart';
 
 import '../API/users.dart';
 
-
+// Define a stateless widget for the Welcome screen.
 class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,10 @@ class Welcome extends StatelessWidget {
           builder: (context, constraints) {
             final screenHeight = constraints.maxHeight;
             final screenWidth = constraints.maxWidth;
-            
-            final double paddingValue = screenWidth * 0.1; // Adjust the padding percentage
-            
+
+            final double paddingValue =
+                screenWidth * 0.1; // Adjust the padding percentage
+
             return Stack(
               children: [
                 Positioned(
@@ -28,7 +29,7 @@ class Welcome extends StatelessWidget {
                     width: screenWidth * 0.3,
                   ),
                 ),
-                
+
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -39,10 +40,10 @@ class Welcome extends StatelessWidget {
                 ),
 
                 //Padding(
-                  //padding: EdgeInsets.only(left: paddingValue),
-                  Center(
+                //padding: EdgeInsets.only(left: paddingValue),
+                Center(
                   child: Column(
-                   // alignment : Alignment.center,
+                    // alignment : Alignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -71,13 +72,13 @@ class Welcome extends StatelessWidget {
                           Navigator.pushNamed(context, '/login');
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.cyan,
+                          backgroundColor: Colors.cyan,
                           padding: EdgeInsets.all(screenWidth * 0.04),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(screenWidth * 0.1),
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.1),
                           ),
                         ),
-
                         child: Text(
                           'Login'.toUpperCase(),
                           style: TextStyle(
@@ -95,13 +96,13 @@ class Welcome extends StatelessWidget {
                           Navigator.pushNamed(context, '/signup');
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.cyanAccent,
+                          backgroundColor: Colors.cyanAccent,
                           padding: EdgeInsets.all(screenWidth * 0.04),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(screenWidth * 0.1),
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.1),
                           ),
                         ),
-
                         child: Text(
                           'Signup'.toUpperCase(),
                           style: TextStyle(
@@ -114,11 +115,9 @@ class Welcome extends StatelessWidget {
                       ),
                     ],
                   ),
-              
                 ),
-              //  ),
-             ],
-            
+                //  ),
+              ],
             );
           },
         ),
@@ -126,4 +125,3 @@ class Welcome extends StatelessWidget {
     );
   }
 }
-

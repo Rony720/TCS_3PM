@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../API/base_client.dart';
 
+//defines a staeful widget for the signup screen
 class Signup extends StatefulWidget {
   const Signup({super.key});
 
@@ -15,6 +16,7 @@ class Signup extends StatefulWidget {
   State<Signup> createState() => _SignupState();
 }
 
+//Define the state class for the Signup screen
 class _SignupState extends State<Signup> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -29,6 +31,7 @@ class _SignupState extends State<Signup> {
   bool _obscureTextt = true;
 
   @override
+  // Dispose controllers to free up resources.
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
@@ -445,6 +448,7 @@ class _SignupState extends State<Signup> {
     );
   }
 
+//method to show date picker for selecting date of birth
   Future<void> _selectDate(BuildContext context) async {
     final DateTime currentDate = DateTime.now();
     final DateTime? selectedDate = await showDatePicker(
@@ -461,6 +465,7 @@ class _SignupState extends State<Signup> {
     }
   }
 
+  // Method to create a new user account
   void createAccount() async {
     // loading circle
     showDialog(
@@ -553,6 +558,7 @@ class _SignupState extends State<Signup> {
     Navigator.pop(context);
   }
 
+  // Method to add user details to the database
   Future addUserDetails(
       String name, String dob, String med, String email, int phone) async {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -569,7 +575,10 @@ class _SignupState extends State<Signup> {
         "username": {"stringValue": name}
       }
     };
-    var response = await MyBaseClient().post('signup', "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/users/", body);
+    var response = await MyBaseClient().post(
+        'signup',
+        "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/users/",
+        body);
 
     if (response != null) {
       debugPrint("POST SUCCESS");

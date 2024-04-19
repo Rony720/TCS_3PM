@@ -31,6 +31,7 @@ late String head;
 
 late PauseButton pauseButton;
 
+//Represents a game score with associated user and timestamp details.
 class Score {
   // String? user;
   Fields? fields;
@@ -60,6 +61,7 @@ class Score {
       };
 }
 
+/// Represents the fields of the score data to be stored in Firebase
 class Fields {
   Dob? user;
   Firebase_score? score;
@@ -77,6 +79,7 @@ class Fields {
       {"user": user, "score": score, "date": date.toJson()};
 }
 
+/// Represents the Firebase score.
 class Firebase_score {
   int? integerValue;
 
@@ -93,6 +96,7 @@ class Firebase_score {
       };
 }
 
+/// Represents the Firebase date and time
 class Firebase_date_time {
   DateTime dateTimeValue;
 
@@ -110,6 +114,7 @@ class Firebase_date_time {
       };
 }
 
+/// This class represents the Fruit collection game.
 class FruitCollection extends FlameGame
     with HasTappables, HasCollisionDetection {
   late TextComponent scoreComponent;
@@ -119,6 +124,7 @@ class FruitCollection extends FlameGame
   late int fruitMissed;
   String email = "";
 
+  /// Fetches the user's email.
   Future fetch_user_email() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -341,6 +347,8 @@ class FruitCollection extends FlameGame
     }
   }
 
+  /// Resets the game state
+
   void reset(bool should_update_firestore) async {
     print("reset called");
     fruitCollected = 0;
@@ -382,6 +390,7 @@ class FruitCollection extends FlameGame
     }
   }
 
+  /// Removes all game components and exits the game.
   void removeAllExit() {
     children.forEach((child) {
       remove(child);
@@ -389,6 +398,7 @@ class FruitCollection extends FlameGame
   }
 }
 
+//to move towards left
 void leftControl() {
   print("inisde leftcontrol");
   print(currentPosition);
@@ -409,6 +419,7 @@ void leftControl() {
   }
 }
 
+//to move towards right
 void rightControl() {
   print("inside right");
   print(currentPosition);

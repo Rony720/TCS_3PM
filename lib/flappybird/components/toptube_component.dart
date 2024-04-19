@@ -7,6 +7,7 @@ import '../../main.dart';
 import '../game/flappy_bird.dart';
 import 'bottomtube_component.dart';
 
+/// This class represents the top tube component in the Flappy Bird game.
 class ToptubeComponent extends SpriteComponent with HasGameRef<FlappyBird> {
   late double tubeHeight;
   late double tubeWidth;
@@ -69,7 +70,7 @@ class ToptubeComponent extends SpriteComponent with HasGameRef<FlappyBird> {
       // int randomValue = random.nextInt(list1.length);
 
       // x + y = 0.60
-  
+
       double x = list1[changer.currentBar];
       double y = 0.60 - x;
 

@@ -8,6 +8,7 @@ import '../../../utils/color_utils.dart';
 import 'progress_bar.dart';
 import 'question_card.dart';
 
+// Define the main body widget for the quiz screen.
 class Body extends StatelessWidget {
   Body({
     Key? key,

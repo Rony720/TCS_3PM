@@ -10,10 +10,12 @@ import 'package:flutter_auth_page/screen_quiz/controllers/question_controller.da
 import '../quiz/components/question_card.dart';
 import '../quiz/quiz_screen.dart';
 
+//// Define the main entry point of the application.
 void main() {
   runApp(InstructionPage());
 }
 
+// Define the instruction page widget
 class InstructionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -104,6 +106,7 @@ class InstructionPage extends StatelessWidget {
   }
 }
 
+// Define the instruction step widget.
 class InstructionStep extends StatelessWidget {
   // final String stepNumber;
   final String stepText;
@@ -137,6 +140,7 @@ class InstructionStep extends StatelessWidget {
   }
 }
 
+// Define the integration widget
 class Integration extends StatelessWidget {
   const Integration({super.key});
 

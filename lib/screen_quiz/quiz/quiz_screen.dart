@@ -5,6 +5,7 @@ import 'package:flutter_auth_page/MLKIT/lowerposedetection/vision_detector_views
 
 import 'components/body.dart';
 
+// Define the quiz screen widget
 class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key});
 
@@ -30,7 +31,7 @@ class QuizScreen extends StatelessWidget {
   }
 }
 
-// Added by Rony
+// Define the front camera widget
 class front_camera extends StatelessWidget {
   const front_camera({super.key});
 

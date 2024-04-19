@@ -10,6 +10,7 @@ import '../fruitcollection/game/fruitcollection_main.dart';
 import '../main.dart' as main;
 
 // ignore: camel_case_types
+// Stateful widget for the Games screen.
 class GamesUpper extends StatefulWidget {
   const GamesUpper({super.key});
 
@@ -17,6 +18,7 @@ class GamesUpper extends StatefulWidget {
   State<GamesUpper> createState() => _GamesUpperState();
 }
 
+// State class for the Games screen
 class _GamesUpperState extends State<GamesUpper> {
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class _GamesUpperState extends State<GamesUpper> {
               Column(children: [
                 Material(
                     color: Colors.white,
-                    child: SizedBox(height: h/10, width: w/2)),
+                    child: SizedBox(height: h / 10, width: w / 2)),
                 Flexible(
                   child: Container(
                     child: Material(
@@ -60,16 +62,17 @@ class _GamesUpperState extends State<GamesUpper> {
                             Column(mainAxisSize: MainAxisSize.min, children: [
                           Ink.image(
                             image: AssetImage('assets/images/fruit.jpg'),
-                            height: h/4.5,
-                            width: w/2.5,
+                            height: h / 4.5,
+                            width: w / 2.5,
                             fit: BoxFit.cover,
                           ),
                           SizedBox(
-                            height: h/35,
+                            height: h / 35,
                           ),
                           Text(
                             'Fruit Collection',
-                            style: TextStyle(fontSize: h/40, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: h / 40, color: Colors.black),
                           )
                         ]),
                       ),
@@ -78,7 +81,7 @@ class _GamesUpperState extends State<GamesUpper> {
                 ),
                 Material(
                     color: Colors.white,
-                    child: SizedBox(height: h/10, width: w/2)),
+                    child: SizedBox(height: h / 10, width: w / 2)),
                 Flexible(
                   child: Container(
                     child: Material(
@@ -103,17 +106,17 @@ class _GamesUpperState extends State<GamesUpper> {
                           children: [
                             Ink.image(
                               image: AssetImage('assets/images/dino.jpg'),
-                              height: h/4.5,
-                              width: w/2.5,
+                              height: h / 4.5,
+                              width: w / 2.5,
                               fit: BoxFit.cover,
                             ),
                             SizedBox(
-                              height: h/35,
+                              height: h / 35,
                             ),
                             Text(
                               'Dino Run',
-                              style:
-                                  TextStyle(fontSize: h/40, color: Colors.black),
+                              style: TextStyle(
+                                  fontSize: h / 40, color: Colors.black),
                             )
                           ],
                         ),
@@ -128,7 +131,7 @@ class _GamesUpperState extends State<GamesUpper> {
                 children: [
                   Material(
                       color: Colors.white,
-                      child: SizedBox(height: h/10, width: w/3)),
+                      child: SizedBox(height: h / 10, width: w / 3)),
                   Flexible(
                     child: Container(
                       child: Material(
@@ -148,7 +151,7 @@ class _GamesUpperState extends State<GamesUpper> {
                   ),
                   Material(
                       color: Colors.white,
-                      child: SizedBox(height: h/5, width: w/3)),
+                      child: SizedBox(height: h / 5, width: w / 3)),
                   Flexible(
                       child: Container(
                           child: Material(
@@ -173,16 +176,17 @@ class _GamesUpperState extends State<GamesUpper> {
                         children: [
                           Ink.image(
                             image: AssetImage('assets/images/flappy.jpg'),
-                            height: h/4.5,
-                            width: w/2.5,
+                            height: h / 4.5,
+                            width: w / 2.5,
                             fit: BoxFit.cover,
                           ),
                           SizedBox(
-                            height: h/35,
+                            height: h / 35,
                           ),
                           Text(
                             'Flappy Bird',
-                            style: TextStyle(fontSize: h/40, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: h / 40, color: Colors.black),
                           )
                         ],
                       ),

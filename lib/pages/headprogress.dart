@@ -81,6 +81,7 @@ import 'package:flutter_auth_page/resources/app_resources.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+// Class definition for the HeadProgress widget.
 class HeadProgress extends StatelessWidget {
   const HeadProgress({required this.isShowingMainData});
 
@@ -105,7 +106,7 @@ class HeadProgress extends StatelessWidget {
         maxY: 4,
         minY: 0,
       );
-
+// Method to define sample data for the LineChart when main data is shown.
   LineChartData get sampleData2 => LineChartData(
         lineTouchData: lineTouchData2,
         gridData: gridData,
@@ -117,14 +118,14 @@ class HeadProgress extends StatelessWidget {
         maxY: 6,
         minY: 0,
       );
-
+// Touch data for the LineChart when main data is shown.
   LineTouchData get lineTouchData1 => LineTouchData(
         handleBuiltInTouches: true,
         touchTooltipData: LineTouchTooltipData(
           tooltipBgColor: Colors.blueGrey.withOpacity(0.8),
         ),
       );
-
+// Titles data for the LineChart when main data is shown.
   FlTitlesData get titlesData1 => FlTitlesData(
         bottomTitles: AxisTitles(
           sideTitles: bottomTitles,
@@ -145,11 +146,11 @@ class HeadProgress extends StatelessWidget {
         lineChartBarData1_2,
         lineChartBarData1_3,
       ];
-
+// Touch data for the LineChart when main data is hidden.
   LineTouchData get lineTouchData2 => const LineTouchData(
         enabled: false,
       );
-
+// Titles data for the LineChart when main data is hidden.
   FlTitlesData get titlesData2 => FlTitlesData(
         bottomTitles: AxisTitles(
           sideTitles: bottomTitles,
@@ -164,13 +165,13 @@ class HeadProgress extends StatelessWidget {
           sideTitles: leftTitles(),
         ),
       );
-
+// Line bars data for the LineChart when main data is hidden.
   List<LineChartBarData> get lineBarsData2 => [
         lineChartBarData2_1,
         lineChartBarData2_2,
         lineChartBarData2_3,
       ];
-
+  // Widget to build left axis title.
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
@@ -201,13 +202,14 @@ class HeadProgress extends StatelessWidget {
     return Text(text, style: style, textAlign: TextAlign.center);
   }
 
+  // Method to create left axis titles.
   SideTitles leftTitles() => SideTitles(
         getTitlesWidget: leftTitleWidgets,
         showTitles: true,
         interval: 1,
         reservedSize: 40,
       );
-
+// Widget to build bottom axis title.
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
@@ -245,7 +247,7 @@ class HeadProgress extends StatelessWidget {
       );
 
   FlGridData get gridData => const FlGridData(show: false);
-
+// Border data for the LineChart.
   FlBorderData get borderData => FlBorderData(
         show: true,
         border: Border(
@@ -256,7 +258,7 @@ class HeadProgress extends StatelessWidget {
           top: const BorderSide(color: Colors.transparent),
         ),
       );
-
+// First line bar data for the LineChart when main data is shown.
   LineChartBarData get lineChartBarData1_1 => LineChartBarData(
         isCurved: true,
         color: AppColors.contentColorGreen,
@@ -274,7 +276,7 @@ class HeadProgress extends StatelessWidget {
           FlSpot(13, 1.8),
         ],
       );
-
+  // Second line bar data for the LineChart when main data is shown.
   LineChartBarData get lineChartBarData1_2 => LineChartBarData(
         isCurved: true,
         color: AppColors.contentColorPink,
@@ -294,7 +296,7 @@ class HeadProgress extends StatelessWidget {
           FlSpot(13, 3.9),
         ],
       );
-
+// Third line bar data for the LineChart when main data is shown.
   LineChartBarData get lineChartBarData1_3 => LineChartBarData(
         isCurved: true,
         color: AppColors.contentColorCyan,
@@ -310,7 +312,7 @@ class HeadProgress extends StatelessWidget {
           FlSpot(13, 2.5),
         ],
       );
-
+// First line bar data for the LineChart when main data is hidden.
   LineChartBarData get lineChartBarData2_1 => LineChartBarData(
         isCurved: true,
         curveSmoothness: 0,
@@ -329,7 +331,7 @@ class HeadProgress extends StatelessWidget {
           FlSpot(13, 1.8),
         ],
       );
-
+// Second line bar data for the LineChart when main data is hidden.
   LineChartBarData get lineChartBarData2_2 => LineChartBarData(
         isCurved: true,
         color: AppColors.contentColorPink.withOpacity(0.5),
@@ -349,7 +351,7 @@ class HeadProgress extends StatelessWidget {
           FlSpot(13, 3.9),
         ],
       );
-
+// Third line bar data for the LineChart when main data is hidden.
   LineChartBarData get lineChartBarData2_3 => LineChartBarData(
         isCurved: true,
         curveSmoothness: 0,
@@ -368,6 +370,7 @@ class HeadProgress extends StatelessWidget {
       );
 }
 
+// Class for LineChartSample1 widget.
 class LineChartSample1 extends StatefulWidget {
   const LineChartSample1({super.key});
 

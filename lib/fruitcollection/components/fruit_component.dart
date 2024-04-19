@@ -7,10 +7,12 @@ import 'package:flame_audio/flame_audio.dart';
 import '../../main.dart';
 import '../game/fruitcollection.dart';
 
+// Defining FruitComponent class, extending SpriteComponent and implementing HasGameRef<FruitCollection>
 class FruitComponent extends SpriteComponent with HasGameRef<FruitCollection> {
   late int positionIndex;
   late double speed;
   FruitComponent(this.positionIndex);
+  // Overriding onLoad method
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
@@ -32,6 +34,7 @@ class FruitComponent extends SpriteComponent with HasGameRef<FruitCollection> {
     if (changer.sensitivity == 1) speed = 1.7;
   }
 
+  // Overriding update method
   @override
   void update(double dt) {
     super.update(dt);

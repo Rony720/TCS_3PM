@@ -6,6 +6,7 @@ import 'package:flutter_auth_page/dino/game/dino_run.dart';
 import '../../main.dart';
 import 'hud.dart';
 
+// This widget allows the user to choose sensitivity for the game
 class SensitivityDino extends StatelessWidget {
   final DinoRun gameRef;
   const SensitivityDino({super.key, required this.gameRef});

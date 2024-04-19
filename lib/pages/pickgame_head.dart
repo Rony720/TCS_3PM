@@ -10,6 +10,7 @@ import '../fruitcollection/game/fruitcollection_main.dart';
 import '../main.dart';
 
 // ignore: camel_case_types
+// Stateful widget for the Games screen.
 class Games extends StatefulWidget {
   const Games({super.key});
 
@@ -17,6 +18,7 @@ class Games extends StatefulWidget {
   State<Games> createState() => _GamesState();
 }
 
+// State class for the Games screen.
 class _GamesState extends State<Games> {
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,8 @@ import '../API/base_client.dart';
 import '../API/users.dart';
 //import 'package:expansion_tile_card/expansion_tile_card.dart';
 
+/// DashboardPage is a stateless widget that displays personal information
+/// of the authenticated user in a well-structured layout.
 class DashboardPage extends StatelessWidget {
   //AuthService authService = AuthService();
 
@@ -16,7 +18,7 @@ class DashboardPage extends StatelessWidget {
   //final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
   String username = 'null', med = 'null', agee = 'null', email = 'null';
   String phone = "null";
-
+//aync function to fetch user data
   Future fetch() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -39,7 +41,7 @@ class DashboardPage extends StatelessWidget {
           username =
               users.documents![i].fields!.username!.stringValue.toString();
           debugPrint(username);
-          
+
           med = users.documents![i].fields!.medical!.stringValue.toString();
           debugPrint(med);
           email = users.documents![i].fields!.email!.stringValue.toString();

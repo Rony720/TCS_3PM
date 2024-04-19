@@ -7,10 +7,9 @@ import 'package:flutter_auth_page/constants.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-
 // import '../reusable_widgets/reusable.dart';
 //import 'drawerscreen.dart';
-
+// Class definition for MyHeaderDrawer which is a StatefulWidget (meaning it can hold state)
 class MyHeaderDrawer extends StatefulWidget {
   const MyHeaderDrawer({super.key});
 
@@ -24,10 +23,13 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-             stops: [0.3, 1],
-            colors: [
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              stops: [
+            0.3,
+            1
+          ],
+              colors: [
             Colors.white,
             Colors.cyan
             // hexStringToColor(Colors.cyan),

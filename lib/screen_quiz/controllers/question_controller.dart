@@ -9,7 +9,7 @@ import 'package:flutter_auth_page/screen_quiz/models/Questions.dart';
 import 'package:flutter_auth_page/screen_quiz/score/score_screen.dart';
 
 // We use get package for our state management
-
+// define a controller class for managing the quiz questions
 class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
   // Lets animated our progress bar
@@ -23,7 +23,7 @@ class QuestionController extends GetxController
   PageController? get pageController => _pageController;
 
   List<Question> listRandomQuestions = [];
-
+  // Method to generate random questions
   void generateRandomQuestions() {
     List<Map<String, dynamic>> randomQuestions = [];
     final random = Random();
@@ -105,6 +105,7 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
+  // Method to check the selected answer.
   void checkAns(Question question, int selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
@@ -123,6 +124,7 @@ class QuestionController extends GetxController
     // });
   }
 
+  // Method to move to the next question.
   void nextQuestion() {
     checkAns(changer.myQuestion, changer.selectedOpt_quiz);
     Future.delayed(const Duration(seconds: 4), () {
@@ -150,6 +152,7 @@ class QuestionController extends GetxController
     });
   }
 
+  // Method to update the question number.
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
     changer.selectedOpt_quiz = -1;

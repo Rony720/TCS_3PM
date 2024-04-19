@@ -11,7 +11,7 @@ import 'bottomtube_component.dart';
 enum BirdWingsState { up, down }
 
 // We use this global variable
-
+// BirdComponent class represents the bird in the game
 class BirdComponent extends SpriteGroupComponent<BirdWingsState>
     with HasGameRef<FlappyBird>, CollisionCallbacks {
   bool wingsDown = true;
@@ -40,6 +40,7 @@ class BirdComponent extends SpriteGroupComponent<BirdWingsState>
     add(CircleHitbox());
   }
 
+  // Method to update bird's position and behavior
   @override
   void update(double dt) {
     super.update(dt);
@@ -81,6 +82,7 @@ class BirdComponent extends SpriteGroupComponent<BirdWingsState>
     }
   }
 
+// Method called when bird collides with other components
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);

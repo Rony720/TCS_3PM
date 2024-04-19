@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../constants.dart';
 
+// Define the progress bar widget for displaying quiz progress.
 class ProgressBar extends StatelessWidget {
   const ProgressBar({
     Key? key,

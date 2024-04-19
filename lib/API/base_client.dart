@@ -4,9 +4,10 @@ import 'package:http/http.dart' as http;
 
 const String baseUrl =
     "https://firestore.googleapis.com/v1/projects/physioplay-9e057/databases/(default)/documents/users/";
-
+// This class defines a base client for making HTTP requests
 class MyBaseClient {
   var client = http.Client();
+  // Function to perform a GET request
   Future<dynamic> get(String api) async {
     var url = Uri.parse(baseUrl + api);
 
@@ -20,7 +21,7 @@ class MyBaseClient {
       print("GET ERROR");
     }
   }
-
+   // Function to perform a POST request
   Future<dynamic> post(String source, String api, dynamic object) async {
     var url = Uri.parse(api);
     var payload = json.encode(object);

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../game/flappy_bird.dart';
 
+// Widget for displaying instructions in Flappy Bird game
 class InstructionFlappyLeg extends StatelessWidget {
   final FlappyBird gameRef;
   const InstructionFlappyLeg({super.key, required this.gameRef});

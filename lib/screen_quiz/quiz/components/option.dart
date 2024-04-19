@@ -5,6 +5,7 @@ import 'package:flutter_auth_page/screen_quiz/controllers/question_controller.da
 import '../../../constants.dart';
 import '../../../main.dart';
 
+// Define the option widget for displaying quiz options.
 class Option extends StatelessWidget {
   const Option({
     Key? key,

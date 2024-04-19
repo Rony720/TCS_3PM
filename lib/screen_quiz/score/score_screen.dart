@@ -7,11 +7,13 @@ import 'package:flutter_auth_page/screen_quiz/welcome/instruction_page.dart';
 
 import '../../utils/color_utils.dart';
 
+// Define the score screen widget.
 class ScoreScreen extends StatelessWidget {
   const ScoreScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the question controller using GetX state management.
     QuestionController qnController = Get.put(QuestionController());
 
     return Scaffold(

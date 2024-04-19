@@ -7,6 +7,7 @@ import 'package:flame_audio/flame_audio.dart';
 import '../game/fruitcollection.dart';
 import 'fruit_component.dart';
 
+// Defining BoyComponent class, extending SpriteComponent and implementing CollisionCallbacks
 class BoyComponent extends SpriteComponent
     with HasGameRef<FruitCollection>, CollisionCallbacks {
   @override
@@ -21,11 +22,13 @@ class BoyComponent extends SpriteComponent
     add(CircleHitbox());
   }
 
+  // Overriding update method
   @override
   void update(double dt) {
     super.update(dt);
   }
 
+  // Handling collision events
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);

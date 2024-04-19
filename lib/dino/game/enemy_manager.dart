@@ -48,7 +48,7 @@ class EnemyManager extends Component with HasGameRef<DinoRun> {
     enemy.size = enemyData.textureSize;
     gameRef.add(enemy);
   }
-
+  // Method called when this component is mounte
   @override
   void onMount() {
     if (isMounted) {
@@ -88,7 +88,7 @@ class EnemyManager extends Component with HasGameRef<DinoRun> {
     _timer.start();
     super.onMount();
   }
-
+  // Method to update the state of this component
   @override
   void update(double dt) {
     if (changer.isGamePaused == true) return;
@@ -96,7 +96,7 @@ class EnemyManager extends Component with HasGameRef<DinoRun> {
     _timer.update(dt);
     super.update(dt);
   }
-
+ // Method to remove all enemies from the game
   void removeAllEnemies() {
     final enemies = gameRef.children.whereType<Enemy>();
     for (var enemy in enemies) {

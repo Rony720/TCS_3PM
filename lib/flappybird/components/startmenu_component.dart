@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../game/flappy_bird.dart';
 
+/// This widget represents the start menu of the Flappy Bird game.
 class StartMenu extends StatelessWidget {
   final FlappyBird gameRef;
   const StartMenu({super.key, required this.gameRef});

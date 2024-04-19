@@ -13,6 +13,7 @@ import '../pages/color_utils.dart';
 import 'leaderboard.dart';
 import 'dashboard.dart';
 
+// Define HomeScreen as a StatefulWidget to manage its state.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -75,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // ignore: non_constant_identifier_names
+  // Widget to build the list of menu items in the drawer.
   Widget MyDrawerList() {
     return Container(
       padding: const EdgeInsets.only(
@@ -111,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+// Widget to build each menu item in the drawer.
   Widget menuItem(int id, String title, IconData icon, bool selected) {
     return Material(
       color: selected ? Colors.grey[300] : Colors.transparent,

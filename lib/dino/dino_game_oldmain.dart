@@ -41,7 +41,6 @@ class DinoRunApp extends StatelessWidget {
           GameOverMenu.id: (_, DinoRun gameRef) => GameOverMenu(
                 gameRef,
               ),
-              
           SettingsMenu.id: (_, DinoRun gameRef) => SettingsMenu(gameRef),
           'InstructionDino': (_, DinoRun gameRef) {
             return changer.currentSelectedBodyPart == "HEAD"
@@ -51,7 +50,9 @@ class DinoRunApp extends StatelessWidget {
                     : InstructionDinoLeg(gameRef);
           },
           'Sensitivity': (_, DinoRun gameRef) {
-            return  SensitivityDino(gameRef: gameRef,);
+            return SensitivityDino(
+              gameRef: gameRef,
+            );
           },
         },
         // By default MainMenu overlay will be active.

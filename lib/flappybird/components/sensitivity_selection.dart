@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../main.dart';
 import '../game/flappy_bird.dart';
 
+//This widget allows the player to choose sensitivity settings for the Flappy Bird game.
 class SensitivityFlappy extends StatelessWidget {
   final FlappyBird gameRef;
   const SensitivityFlappy({super.key, required this.gameRef});

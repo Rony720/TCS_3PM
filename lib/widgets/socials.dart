@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_auth_page/constants.dart';
 
+// Define the social widget.
 class Social extends StatelessWidget {
   const Social({super.key});
 

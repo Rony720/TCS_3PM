@@ -22,7 +22,7 @@ class Enemy extends SpriteAnimationComponent
       ),
     );
   }
-
+  // Method called when this component is mounted
   @override
   void onMount() {
     // Reduce the size of enemy as they look too
@@ -40,6 +40,7 @@ class Enemy extends SpriteAnimationComponent
     super.onMount();
   }
 
+  // Method to update the state of this component
   @override
   void update(double dt) {
     if (changer.isGamePaused == true) return;

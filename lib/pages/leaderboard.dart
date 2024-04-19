@@ -208,7 +208,7 @@ class progressPage extends StatefulWidget {
   @override
   State<progressPage> createState() => _progressPageState();
 }
-
+// Class definition for the progressPage widget.
 class _progressPageState extends State<progressPage> {
   @override
  Widget build(BuildContext context) {

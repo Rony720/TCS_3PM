@@ -7,6 +7,7 @@ import 'package:flutter_auth_page/main.dart';
 
 import '../game/flappy_bird.dart';
 
+/// This widget represents the pause menu for the Flappy Bird game.
 class PauseMenuFlappy extends StatelessWidget {
   final FlappyBird gameRef;
   const PauseMenuFlappy({super.key, required this.gameRef});

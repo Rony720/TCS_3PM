@@ -6,6 +6,7 @@ import 'package:flame/src/gestures/events.dart';
 import '../game/flappy_bird.dart';
 import 'bird_component.dart';
 
+// BackgroundComponent class represents the background of the game
 class BackgroundComponent extends SpriteComponent
     with HasGameRef<FlappyBird>, Tappable {
   @override

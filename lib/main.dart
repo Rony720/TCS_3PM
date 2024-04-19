@@ -16,8 +16,11 @@ import 'firebase_options.dart';
 import 'main_page.dart';
 import 'screen_quiz/models/Questions.dart';
 
+//global variables
 List<CameraDescription> cameras = [];
 final Changer changer = Changer();
+
+// Main function
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await dinoHead.initHive();
@@ -31,6 +34,7 @@ void main() async {
   runApp(const MyApp());
 }
 
+// Main application widget
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -61,6 +65,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Change notifier class for managing game state
 class Changer extends ChangeNotifier {
   // SELECTED GAMES WILL BE "FLAPPY","DINO","FRUT","QUIZ"
   String currentSelectedGame = "";
@@ -124,6 +129,7 @@ class Changer extends ChangeNotifier {
 
   // QUIZ END
 
+  // Notifies listeners of changes
   void notify() {
     notifyListeners();
   }

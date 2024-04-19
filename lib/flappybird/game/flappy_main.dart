@@ -14,6 +14,7 @@ import '../components/pauseMenu.dart';
 import '../components/startmenu_component.dart';
 import 'flappy_bird.dart';
 
+// The FlappyFaceDetect widget is defined as a stateless widget.
 class FlappyFaceDetect extends StatelessWidget {
   const FlappyFaceDetect({super.key});
 

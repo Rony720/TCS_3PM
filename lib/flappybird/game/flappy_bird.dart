@@ -18,6 +18,7 @@ import '../components/toptube_component.dart';
 FlappyBird flappyBird = FlappyBird();
 late BirdComponent bird;
 
+/// Represents the score data to be stored in Firebase.
 class Score {
   // String? user;
   Fields? fields;
@@ -47,6 +48,7 @@ class Score {
       };
 }
 
+/// Represents the fields of the score data to be stored in Firebase.
 class Fields {
   Dob? user;
   Firebase_score? score;
@@ -64,6 +66,7 @@ class Fields {
       {"user": user, "score": score, "date": date.toJson()};
 }
 
+/// Represents the Firebase score.
 class Firebase_score {
   int? integerValue;
 
@@ -80,6 +83,7 @@ class Firebase_score {
       };
 }
 
+/// Represents the Firebase date and time.
 class Firebase_date_time {
   DateTime dateTimeValue;
 
@@ -97,11 +101,13 @@ class Firebase_date_time {
       };
 }
 
+/// This class represents the Flappy Bird game.
 class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
   int score = 0;
   late TextComponent scoreComponent;
   String email = "";
 
+  /// Fetches the user's email.
   Future fetch_user_email() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -228,6 +234,7 @@ class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
     }
   }
 
+  /// Resets the game state
   void reset(bool should_update_firestore) async {
     int scoreFirestore = score;
     score = 0;
@@ -275,6 +282,7 @@ class FlappyBird extends FlameGame with HasTappables, HasCollisionDetection {
     }
   }
 
+  /// Removes all game components and exits the game.
   void removeAllExit() {
     children.forEach((child) {
       remove(child);
