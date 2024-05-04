@@ -26,7 +26,7 @@ class _LoginState extends State<Login> {
         });
     if (emailController.text == "" || passwordController.text == "") {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Row(
             children: [
               // Icon(icon, color: Colors.white),
@@ -37,6 +37,7 @@ class _LoginState extends State<Login> {
           backgroundColor: Colors.red,
         ),
       );
+      Navigator.of(context).pop();
     } else {
       try {
         FocusScope.of(context).unfocus();
@@ -50,9 +51,9 @@ class _LoginState extends State<Login> {
           // ignore: use_build_context_synchronously
           FocusScope.of(context).unfocus();
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Row(
-                children: const [
+                children: [
                   // Icon(icon, color: Colors.white),
                   SizedBox(width: 8.0),
                   Text("Login Success"),
@@ -223,13 +224,13 @@ class _LoginState extends State<Login> {
                       textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
                           hintText: "Password :",
-                          hintStyle: TextStyle(
+                          hintStyle:const TextStyle(
                             fontFamily: 'SourceSansPro',
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                           ),
                           // labelText: "Email :",
-                          labelStyle: TextStyle(
+                          labelStyle:const TextStyle(
                             fontSize: 20,
                           ),
                           // border: OutlineInputBorder(),
@@ -246,8 +247,8 @@ class _LoginState extends State<Login> {
                               });
                             },
                             child: Icon(_obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off),
+                                ? Icons.visibility_off
+                                : Icons.visibility),
                           )),
                     ),
                   ),

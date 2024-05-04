@@ -209,8 +209,8 @@ class _SignupState extends State<Signup> {
                               });
                             },
                             child: Icon(_obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off),
+                                ? Icons.visibility_off
+                                : Icons.visibility),
                           ),
                         ),
                       ),
@@ -256,9 +256,9 @@ class _SignupState extends State<Signup> {
                                 _obscureTextt = !_obscureTextt;
                               });
                             },
-                            child: Icon(_obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off),
+                            child: Icon(_obscureTextt
+                                ? Icons.visibility_off
+                                : Icons.visibility),
                           ),
                         ),
                       ),
@@ -465,6 +465,10 @@ class _SignupState extends State<Signup> {
     }
   }
 
+  bool isStringEmpty(String input) {
+    return input.isEmpty;
+  }
+
   // Method to create a new user account
   void createAccount() async {
     // loading circle
@@ -477,14 +481,36 @@ class _SignupState extends State<Signup> {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String cPassword = cPasswordController.text.trim();
-
+    String username = usernameController.text.trim();
+    String dob = dobController.text.trim();
+    String medicalCondition = medController.text.trim();
+    String phone = phoneController.text.trim();
     // create new account
 
-    if (password != cPassword) {
+    if (isStringEmpty(email) ||
+        isStringEmpty(password) ||
+        isStringEmpty(cPassword) ||
+        isStringEmpty(username) ||
+        isStringEmpty(dob) ||
+        isStringEmpty(medicalCondition) ||
+        isStringEmpty(phone)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Row(
-            children: const [
+            children: [
+              // Icon(icon, color: Colors.white),
+              SizedBox(width: 8.0),
+              Text("Please enter all fields"),
+            ],
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else if (password != cPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Row(
+            children: [
               // Icon(icon, color: Colors.white),
               SizedBox(width: 8.0),
               Text("Passwords aren't matching"),
@@ -501,9 +527,9 @@ class _SignupState extends State<Signup> {
 
         if (userCredential.user != null) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Row(
-                children: const [
+                children: [
                   // Icon(icon, color: Colors.white),
                   SizedBox(width: 8.0),
                   Text("Successfully Created Account"),
@@ -515,12 +541,12 @@ class _SignupState extends State<Signup> {
           // add user details
 
           addUserDetails(
-              usernameController.text.trim(),
-              dobController.text.trim(),
-              medController.text.trim(),
-              emailController.text.trim(),
-              int.parse(phoneController.text.trim()));
+              username, dob, medicalCondition, email, int.parse(phone));
         }
+        // remove circular progress
+        Navigator.of(context).pop();
+        Navigator.pop(context);
+        return;
       } on FirebaseAuthException catch (e) {
         print(e.code.toString());
         String errorMessage;
@@ -548,14 +574,12 @@ class _SignupState extends State<Signup> {
           ),
         );
       } on FirebaseException catch (e) {
-        print("FIREBASE EXCEPTION");
-        print("FIREBASE EXCEPTION");
-        print("FIREBASE EXCEPTION");
+        debugPrint("FIREBASE EXCEPTION");
       }
     }
     // remove circular progress
     Navigator.of(context).pop();
-    Navigator.pop(context);
+    // Navigator.pop(context);
   }
 
   // Method to add user details to the database
