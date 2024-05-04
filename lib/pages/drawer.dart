@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:flutter_auth_page/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_auth_page/pages/signup.dart';
-import 'package:flutter_auth_page/constants.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
-// import '../reusable_widgets/reusable.dart';
-//import 'drawerscreen.dart';
-// Class definition for MyHeaderDrawer which is a StatefulWidget (meaning it can hold state)
+import 'dashboard.dart';
 class MyHeaderDrawer extends StatefulWidget {
   const MyHeaderDrawer({super.key});
 
@@ -20,8 +10,8 @@ class MyHeaderDrawer extends StatefulWidget {
 class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
+    return  Container(
+      decoration:const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -51,11 +41,22 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
                   image: AssetImage('assets/images/gamer.png'),
                 )),
           ),
-          const Text(
-            "User",
-            style: TextStyle(
-                color: Colors.black, fontSize: 30, fontStyle: FontStyle.normal),
-          ),
+          FutureBuilder(future: DashboardPage().fetch(), builder: (context, snapshot){
+            if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator(); // Show a loading indicator while fetching
+              } else if (snapshot.hasError) {
+                return Text('Error fetching username');
+              } else {
+                return Text(
+                  snapshot.data ?? 'User',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontStyle: FontStyle.normal,
+                  ),
+                );
+              }
+          }),
         ],
       ),
     );

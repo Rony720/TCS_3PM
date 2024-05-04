@@ -1,34 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../API/base_client.dart';
 import '../API/users.dart';
-//import 'package:expansion_tile_card/expansion_tile_card.dart';
 
-/// DashboardPage is a stateless widget that displays personal information
-/// of the authenticated user in a well-structured layout.
 class DashboardPage extends StatelessWidget {
-  //AuthService authService = AuthService();
-
-  @override
-
-  //final GlobalKey<ExpansiSonTileCardState> cardA = new GlobalKey();
-  //final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
-  String username = 'null', med = 'null', agee = 'null', email = 'null';
-  String phone = "null";
-//aync function to fetch user data
+  String username = 'null',
+      medicalCondition = 'null',
+      age = 'null',
+      email = 'null',
+      phone = "null";
+  //aync function to fetch user data
   Future fetch() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
 
     final User? user = auth.currentUser;
     final uid = user!.uid;
 
-    print("UID IS ${uid}");
-    print("UID IS ${uid}");
-    print("UID IS ${uid}");
-    print("UID IS ${uid}");
+    debugPrint("UID: $uid");
 
     var response = await MyBaseClient().get('');
     if (response != null) {
@@ -42,22 +31,27 @@ class DashboardPage extends StatelessWidget {
               users.documents![i].fields!.username!.stringValue.toString();
           debugPrint(username);
 
-          med = users.documents![i].fields!.medical!.stringValue.toString();
-          debugPrint(med);
+          medicalCondition =
+              users.documents![i].fields!.medical!.stringValue.toString();
+          debugPrint(medicalCondition);
           email = users.documents![i].fields!.email!.stringValue.toString();
           debugPrint(email);
-          agee = users.documents![i].fields!.dob!.stringValue!;
-          debugPrint(agee);
+          age = users.documents![i].fields!.dob!.stringValue!;
+          debugPrint(age);
           phone = users.documents![i].fields!.phone!.integerValue.toString();
           debugPrint(phone);
           debugPrint(username);
-          debugPrint(med);
+          debugPrint(medicalCondition);
           debugPrint(phone);
           debugPrint(email);
           return username;
         }
       }
     }
+  }
+
+  String getUserName() {
+    return username;
   }
 
   Widget build(BuildContext context) {
@@ -145,7 +139,7 @@ class DashboardPage extends StatelessWidget {
                                                   ConnectionState.done)
                                                 return Text(
                                                     "Loading data...Please wait");
-                                              return Text(agee);
+                                              return Text(age);
                                             },
                                           )
                                           //subtitle: Text(age),
@@ -161,7 +155,7 @@ class DashboardPage extends StatelessWidget {
                                                 ConnectionState.done)
                                               return Text(
                                                   "Loading data...Please wait");
-                                            return Text(med);
+                                            return Text(medicalCondition);
                                           },
                                         ),
                                         //subtitle: Text(med),
@@ -223,7 +217,7 @@ class DashboardPage extends StatelessWidget {
 
   //final GlobalKey<ExpansiSonTileCardState> cardA = new GlobalKey();
   //final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
-  String username = 'a', med = 'a', agee = 'a', email = 'a';
+  String username = 'a', med = 'a', age = 'a', email = 'a';
   int age = 0;
 
   fetch() async {
@@ -240,7 +234,7 @@ class DashboardPage extends StatelessWidget {
         age = ds.data()!['age'] ?? [];
         med = ds.data()!['medical condition'] ?? [];
         email = ds.data()!['email'] ?? [];
-        agee = age.toString();
+        age = age.toString();
         //print(username);
       }).catchError((e) {
         print(e);
@@ -323,7 +317,7 @@ class DashboardPage extends StatelessWidget {
                                                   ConnectionState.done)
                                                 return Text(
                                                     "Loading data...Please wait");
-                                              return Text(agee);
+                                              return Text(age);
                                             },
                                           )
                                           //subtitle: Text(age),
