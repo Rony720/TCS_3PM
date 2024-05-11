@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_auth_page/main.dart';
+import 'package:flame_audio/flame_audio.dart';
 import '../game/fruitcollection.dart';
 
 class StartMenu extends StatelessWidget {
@@ -45,6 +46,26 @@ class StartMenu extends StatelessWidget {
                     },
                     child: const Text(
                       'Play',
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                     ElevatedButton(
+                     style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.amber,
+                        padding: EdgeInsets.all(12)),
+                    onPressed: () {
+                      changer.isGamePaused = false;
+                      changer.notify();
+                      gameRef.removeAllExit();
+                      gameRef.reset(true);
+                      FlameAudio.bgm.dispose();
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Exit',
                       style: TextStyle(
                         fontSize: 30,
                       ),

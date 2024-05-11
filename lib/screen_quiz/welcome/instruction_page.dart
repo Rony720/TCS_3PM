@@ -96,6 +96,15 @@ class InstructionPage extends StatelessWidget {
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text(
+                      'Exit',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
                 ],
               ),
             ),
