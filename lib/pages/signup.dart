@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_auth_page/constants.dart';
@@ -519,7 +517,21 @@ class _SignupState extends State<Signup> {
           backgroundColor: Colors.red,
         ),
       );
-    } else {
+    } else if (password.length < 8 ){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Row(
+            children: [
+              // Icon(icon, color: Colors.white),
+              SizedBox(width: 8.0),
+              Text("The password should be of atleast 8 characters"),
+            ],
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+     else {
       try {
         FocusScope.of(context).unfocus();
         UserCredential userCredential = await FirebaseAuth.instance
@@ -551,7 +563,7 @@ class _SignupState extends State<Signup> {
         print(e.code.toString());
         String errorMessage;
         if (e.code == 'weak-password') {
-          errorMessage = 'The password provided is too weak';
+          errorMessage = 'The password should be of atleast 8 characters';
         } else if (e.code == 'email-already-in-use') {
           errorMessage = 'The account already exists for that email';
         } else if (e.code == 'invalid-email') {
