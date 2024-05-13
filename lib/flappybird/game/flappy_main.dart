@@ -1,4 +1,5 @@
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/flappybird/components/sensitivity_selection.dart';
 import '../components/instruction_page_upper.dart';
@@ -20,62 +21,72 @@ class FlappyFaceDetect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-      children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.65,
-          child: GameWidget(
-            game: FlappyBird(),
-            overlayBuilderMap: {
-              'StartMenu': (BuildContext context, FlappyBird flappyBird) {
-                return StartMenu(
-                  gameRef: flappyBird,
-                );
+    return WillPopScope(
+      onWillPop: () async {
+        // Stop or pause audio when back button is pressed
+        FlameAudio.bgm
+            .stop(); // or use pause() method if you want to resume later
+
+        // Return true to allow back navigation
+        return true;
+      },
+      child: Scaffold(
+          body: Column(
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.65,
+            child: GameWidget(
+              game: FlappyBird(),
+              overlayBuilderMap: {
+                'StartMenu': (BuildContext context, FlappyBird flappyBird) {
+                  return StartMenu(
+                    gameRef: flappyBird,
+                  );
+                },
+                'GameOverMenu': (BuildContext context, FlappyBird flappyBird) {
+                  return GameOverMenu(
+                    gameRef: flappyBird,
+                  );
+                },
+                'Sensitivity': (BuildContext context, FlappyBird flappyBird) {
+                  return SensitivityFlappy(
+                    gameRef: flappyBird,
+                  );
+                },
+                'PauseMenu': (BuildContext context, FlappyBird flappyBird) {
+                  return PauseMenuFlappy(
+                    gameRef: flappyBird,
+                  );
+                },
+                'InstructionFlappy':
+                    (BuildContext context, FlappyBird flappyBird) {
+                  return changer.currentSelectedBodyPart == "HEAD"
+                      ? InstructionFlappyHead(
+                          gameRef: flappyBird,
+                        )
+                      : changer.currentSelectedBodyPart == "HAND"
+                          ? InstructionFlappyShoulder(
+                              gameRef: flappyBird,
+                            )
+                          : InstructionFlappyLeg(
+                              gameRef: flappyBird,
+                            );
+                },
               },
-              'GameOverMenu': (BuildContext context, FlappyBird flappyBird) {
-                return GameOverMenu(
-                  gameRef: flappyBird,
-                );
-              },
-              'Sensitivity': (BuildContext context, FlappyBird flappyBird) {
-                return SensitivityFlappy(
-                  gameRef: flappyBird,
-                );
-              },
-              'PauseMenu': (BuildContext context, FlappyBird flappyBird) {
-                return PauseMenuFlappy(
-                  gameRef: flappyBird,
-                );
-              },
-              'InstructionFlappy':
-                  (BuildContext context, FlappyBird flappyBird) {
-                return changer.currentSelectedBodyPart == "HEAD"
-                    ? InstructionFlappyHead(
-                        gameRef: flappyBird,
-                      )
-                    : changer.currentSelectedBodyPart == "HAND"
-                        ? InstructionFlappyShoulder(
-                            gameRef: flappyBird,
-                          )
-                        : InstructionFlappyLeg(
-                            gameRef: flappyBird,
-                          );
-              },
-            },
+            ),
           ),
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.35,
-          child: changer.currentSelectedBodyPart == "HEAD"
-              ? FaceDetectorView()
-              : changer.currentSelectedBodyPart == "HAND"
-                  ? const PoseDetectorViewHand()
-                  : const PoseDetectorView(),
-        ),
-      ],
-    ));
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.35,
+            child: changer.currentSelectedBodyPart == "HEAD"
+                ? FaceDetectorView()
+                : changer.currentSelectedBodyPart == "HAND"
+                    ? const PoseDetectorViewHand()
+                    : const PoseDetectorView(),
+          ),
+        ],
+      )),
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_auth_page/MLKIT/upperposedetection/vision_detector_views/detector_views.dart';
 import 'package:hive/hive.dart';
@@ -18,25 +19,34 @@ class DinoRunFace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-      children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.60,
-          child: DinoRunApp(),
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.40,
-          child: changer.currentSelectedBodyPart == "HEAD"
-              ? FaceDetectorView()
-              : changer.currentSelectedBodyPart == 'HAND'
-                  ? const PoseDetectorViewHand()
-                  : const PoseDetectorView(),
-        ),
-      ],
-    ));
+    return WillPopScope(
+        onWillPop: () async {
+          // Stop or pause audio when back button is pressed
+          FlameAudio.bgm
+              .stop(); // or use pause() method if you want to resume later
+
+          // Return true to allow back navigation
+          return true;
+        },
+        child: Scaffold(
+            body: Column(
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.60,
+              child: DinoRunApp(),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.40,
+              child: changer.currentSelectedBodyPart == "HEAD"
+                  ? FaceDetectorView()
+                  : changer.currentSelectedBodyPart == 'HAND'
+                      ? const PoseDetectorViewHand()
+                      : const PoseDetectorView(),
+            ),
+          ],
+        )));
   }
 }
 

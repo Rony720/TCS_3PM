@@ -1,4 +1,5 @@
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_auth_page/MLKIT/upperposedetection/vision_detector_views/pose_detector_view_upper.dart';
@@ -18,7 +19,14 @@ class FruitCollectionFace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(onWillPop: () async {
+        // Stop or pause audio when back button is pressed
+        FlameAudio.bgm
+            .stop(); // or use pause() method if you want to resume later
+
+        // Return true to allow back navigation
+        return true;
+      },child:     Scaffold(
         body: Column(
       children: [
         SizedBox(
@@ -72,6 +80,6 @@ class FruitCollectionFace extends StatelessWidget {
               : PoseDetectorViewHand(),
         ),
       ],
-    ));
+    )),);
   }
 }
