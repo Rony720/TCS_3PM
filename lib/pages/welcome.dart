@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_page/API/base_client.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_auth_page/constants.dart';
+import 'package:flutter_auth_page/terms/authentication/terms_of_use.dart';
 
 import '../API/users.dart';
 
@@ -113,6 +114,7 @@ class Welcome extends StatelessWidget {
                           ),
                         ),
                       ),
+                      TermsOfUse(),
                     ],
                   ),
                 ),
