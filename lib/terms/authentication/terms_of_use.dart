@@ -15,7 +15,7 @@ class TermsOfUse extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          text: "By creating an account, you are agreeing to our\n",
+          text: "By creating an account, you are agreeing to our ",
           style: Theme.of(context).textTheme.bodyText1,
           children: [
             TextSpan(

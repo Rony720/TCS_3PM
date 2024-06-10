@@ -38,20 +38,17 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,
-        designSize: Size(750, 1334)); // Set your design reference size
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/splash',
       routes: {
-        // '/drawer': (context) => const
+        '/splash': (context) => const SplashScreen(),
         '/': (context) => const MainPage(),
         '/login': (context) => const Login(),
         '/signup': (context) => const Signup(),
@@ -64,6 +61,60 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// Splash Screen
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacementNamed('/');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(750, 1334));
+    final double logoSize = ScreenUtil().screenWidth / 1.5;
+    final double fontSize = ScreenUtil().screenWidth * 0.04;
+
+    return Scaffold(
+      body: Stack(
+        children: [
+          Center(
+            child: Image.asset(
+              'assets/images/neuro_logo.png', // Path to your logo image
+              width: logoSize,
+              height: logoSize,
+            ),
+          ),
+          Positioned(
+            bottom: 20.0,
+            left: 0,
+            right: 0,
+            child: Text(
+              '©2024 Inclusys Neuro Org',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: fontSize,
+                fontStyle: FontStyle.italic
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+// Splash Screen End
 
 // Change notifier class for managing game state
 class Changer extends ChangeNotifier {
