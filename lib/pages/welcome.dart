@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth_page/API/base_client.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_auth_page/constants.dart';
-import 'package:flutter_auth_page/terms/authentication/terms_of_use.dart';
 
-import '../API/users.dart';
 
 // Define a stateless widget for the Welcome screen.
 class Welcome extends StatelessWidget {
@@ -16,10 +12,6 @@ class Welcome extends StatelessWidget {
           builder: (context, constraints) {
             final screenHeight = constraints.maxHeight;
             final screenWidth = constraints.maxWidth;
-
-            final double paddingValue =
-                screenWidth * 0.1; // Adjust the padding percentage
-
             return Stack(
               children: [
                 Positioned(
@@ -114,7 +106,6 @@ class Welcome extends StatelessWidget {
                           ),
                         ),
                       ),
-                      TermsOfUse(),
                     ],
                   ),
                 ),

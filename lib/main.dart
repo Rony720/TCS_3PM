@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_page/pages/privacy_policy.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_auth_page/pages/login.dart';
 import 'package:flutter_auth_page/pages/signup.dart';
@@ -10,11 +11,14 @@ import 'package:get/get.dart';
 import 'package:flutter_auth_page/pages/headprogress.dart';
 import 'package:flutter_auth_page/pages/lowerprogress.dart';
 import 'package:flutter_auth_page/pages/upperprogress.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dino/dino_game_main.dart' as dinoHead;
 import 'firebase_options.dart';
 import 'main_page.dart';
 import 'screen_quiz/models/Questions.dart';
+
+import 'pages/termsandconditions.dart';
 
 //global variables
 List<CameraDescription> cameras = [];
@@ -31,7 +35,7 @@ void main() async {
   Flame.device.fullScreen();
   Flame.device.setPortrait();
   cameras = await availableCameras();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 // Main application widget
@@ -49,7 +53,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => const SplashScreen(),
-        '/': (context) => const MainPage(),
+        '/privacy': (context) => PrivacyPolicyPage(),
+        '/main': (context) => const MainPage(),
+        '/terms': (context) => TermsAndConditionsPage(),
         '/login': (context) => const Login(),
         '/signup': (context) => const Signup(),
         '/headchart': (context) => const HeadProgress(isShowingMainData: true),
@@ -74,9 +80,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed('/');
-    });
+    _navigateToNext();
+    // Future.delayed(const Duration(seconds: 3), () {
+    //   Navigator.of(context).pushReplacementNamed('/');
+    // });
+  }
+
+  Future<void> _navigateToNext() async {
+    final prefs = await SharedPreferences.getInstance();
+    final hasAcceptedTerms = prefs.getBool('hasAcceptedTerms') ?? false;
+
+    await Future.delayed(const Duration(seconds: 3));
+    if (hasAcceptedTerms) {
+      Navigator.of(context).pushReplacementNamed('/main');
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => TermsAndConditionsPage()),
+      );
+    }
   }
 
   @override
@@ -90,23 +111,41 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Center(
             child: Image.asset(
-              'assets/images/neuro_logo.png', // Path to your logo image
+              'assets/images/neuro_logo.png', // Path to your main logo image
               width: logoSize,
               height: logoSize,
             ),
           ),
           Positioned(
-            bottom: 20.0,
+            bottom: 10,
             left: 0,
             right: 0,
-            child: Text(
-              '©2024 Inclusys Neuro Org',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: fontSize,
-                fontStyle: FontStyle.italic
-              ),
+            child: Column(
+              children: [
+                Container(
+                  constraints: BoxConstraints(
+                    maxWidth: logoSize * 0.9,
+                    maxHeight: logoSize * 0.2,
+                  ),
+                  child: Image.asset(
+                    'assets/images/punarjeeva_logo.webp',
+                    width: logoSize * 0.9,
+                    height: logoSize * 0.9,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    'Powered by Punarjeeva Technology Solutions',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: fontSize,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
         ],
